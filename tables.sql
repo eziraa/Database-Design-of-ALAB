@@ -241,3 +241,11 @@ CREATE TABLE tblPriority(
 	[Land Owner ID] INT CONSTRAINT tblPriorityFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID])
 	CONSTRAINT tblPriorityPK PRIMARY KEY ([Land Owner ID])
 )
+
+
+--CREATE TEAM TABLE
+CREATE TABLE tblTeam(
+	[Team Name] VARCHAR(23) CONSTRAINT tblGroupWorkPK PRIMARY KEY ,
+	[Number of Member] 	INT	
+	 )
+
