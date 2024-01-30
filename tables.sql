@@ -100,4 +100,9 @@ CREATE TABLE tblHouse(
 	[Labour Quantity] INT ,
 	[Current labour Cost] FLOAT ,
 	[Land ID] INT CONSTRAINT tblHouseFK FOREIGN KEY REFERENCES Property.tblLand([Land ID]))
-	
+
+
+--CREATE BUILDING MATERIAL TABLE
+CREATE TABLE tblBLDGMaterial( 
+	[BLDGMterial Name] VARCHAR(23) CONSTRAINT tblBLDGMaterialPK PRIMARY KEY ,
+	[Current Price] FLOAT)
