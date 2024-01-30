@@ -167,3 +167,15 @@ CREATE TABLE  tblEmployee(
 	[Job Title] VARCHAR(23) CONSTRAINT tblEpmloyeeFK2 FOREIGN KEY REFERENCES staff.tblResponsibility ([Job Title]))
 
 
+--CREATE PROJECT REQUEST TO LAND
+CREATE TABLE tblProReqToLand(
+	[Request ID] INT CONSTRAINT tblProReqToLandPK PRIMARY KEY  IDENTITY(1,1),
+	[Urgency] VARCHAR(20),
+	[Land Recoverability] VARCHAR(20),
+	[Request Date] DATE ,
+	[Requested Area] FLOAT ,
+	[Project Duration] FLOAT ,
+	[Sub Kebele] VARCHAR(23) CONSTRAINT tblProReqToLandFK1 FOREIGN KEY REFERENCES LandOwner.tblAddress([Sub Kebele]),
+	[Responsed By] VARCHAR(23) CONSTRAINT tblProReqToLandFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Project ID] INT CONSTRAINT tblProReqToLandFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]))
+
