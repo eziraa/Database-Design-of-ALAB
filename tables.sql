@@ -288,3 +288,15 @@ CREATE TABLE tblAccount(
 	[Account Number] INT UNIQUE,
 	CONSTRAINT tblAccountPK  PRIMARY KEY ([Land Owner ID])
 )
+
+
+-- CREATE TABLE PROJECT PAYS TO LAND
+CREATE TABLE tblProjPaysToLanOwn(
+	[Land Owner ID] INT CONSTRAINT tblProjPaysToLanOwnFK1  FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Project ID] INT CONSTRAINT tblProjPaysToLanOwnFK2 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
+	[Deposited Date] DATE,
+	[Amount] FLOAT,
+	CONSTRAINT tblProjPaysToLanOwnPK  PRIMARY KEY ([Land Owner ID], [Project ID]))
+
+
+
