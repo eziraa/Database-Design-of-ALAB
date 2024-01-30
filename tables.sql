@@ -221,3 +221,13 @@ CREATE TABLE tblCountProperties(
 	[Project ID] INT CONSTRAINT tblCountPropertiesFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
 	[Representative ID] INT CONSTRAINT tblCountPropertiesFK4 FOREIGN KEY REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	CONSTRAINT tblCountPropertiesPK PRIMARY KEY ([Land Owner ID],[Project ID]) )
+
+--CREATE ESTIMATE PRICE TABLE
+CREATE TABLE tblEstimatePrice(
+	[Estimation Date] DATE,
+	[Check Estiamtion ] VARCHAR(23),
+	[Amount] FLOAT,
+	[Land Owner ID] INT CONSTRAINT tblEstimatePriceFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Estimated by] VARCHAR(23) CONSTRAINT tblEstimatePriceFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Project ID] INT CONSTRAINT tblEstimatePriceFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
+	CONSTRAINT tblEstimatePricesPK PRIMARY KEY ([Land Owner ID],[Project ID]))
