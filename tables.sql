@@ -211,3 +211,13 @@ CREATE TABLE tblMinuteDocument(
 	[Held By] VARCHAR(23) CONSTRAINT tblMinuteDocumentFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
 	[Project ID] INT CONSTRAINT tblMinuteDocumentFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
 	CONSTRAINT tblMinuteDocumentPK PRIMARY KEY ([Land Owner ID],[Document Type],[Project ID]))
+
+--CREATE COUNT PROPERTY TABLE
+CREATE TABLE tblCountProperties(
+	[Counting Date] DATE,
+	[Check Counting] VARCHAR(23),
+	[Land Owner ID] INT CONSTRAINT tblCountPropertiesFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Counted By] VARCHAR(23) CONSTRAINT tblCountPropertiesFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Project ID] INT CONSTRAINT tblCountPropertiesFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
+	[Representative ID] INT CONSTRAINT tblCountPropertiesFK4 FOREIGN KEY REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	CONSTRAINT tblCountPropertiesPK PRIMARY KEY ([Land Owner ID],[Project ID]) )
