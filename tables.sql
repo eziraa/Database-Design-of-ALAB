@@ -272,3 +272,12 @@ CREATE TABLE tblInterestRequest(
 	[Land Owner ID] INT CONSTRAINT InterestRequestFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([land Owner ID]),
 	[Requested By] VARCHAR(23) CONSTRAINT InterestRequestFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]), 
 	CONSTRAINT tblInterestRequestPK PRIMARY KEY ([Land Owner ID],[Interest Name]))
+
+--CREATE PRIORITIZED LAND OWNER TABLE
+CREATE TABLE tblPrioritizedLandOwner(
+	[Priority ID] INT IDENTITY(1, 1),
+	[Land Owner ID] INT CONSTRAINT tblPrioritizedLandOwnerFK1  FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([land Owner ID]),
+	[Compensated Area of City Land] INT,
+	[Prioritized By] VARCHAR(23) CONSTRAINT tblPrioritizedLandOwnerFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	CONSTRAINT tblPrioritizedLandOwnerPK   PRIMARY KEY ([land Owner ID])
+	)
