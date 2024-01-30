@@ -1,0 +1,8 @@
+
+--CREATE ADDRESS TABLE
+CREATE TABLE tblAddress ( 
+	[Region] VARCHAR(23) DEFAULT 'Amhara',
+	[Zone] VARCHAR(23),
+	[Wereda] VARCHAR(23),
+	[Kebele] VARCHAR(23),
+	[Sub Kebele] VARCHAR(23) CONSTRAINT tblAddressPK PRIMARY KEY )
