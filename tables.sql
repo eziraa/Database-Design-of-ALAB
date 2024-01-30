@@ -179,3 +179,14 @@ CREATE TABLE tblProReqToLand(
 	[Responsed By] VARCHAR(23) CONSTRAINT tblProReqToLandFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
 	[Project ID] INT CONSTRAINT tblProReqToLandFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]))
 
+
+--CREATE PAYMENT CHECK TABLE
+CREATE TABLE tblPaymentCheck(
+	[Land Owner ID] INT CONSTRAINT tblPaymentCheckFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Checked By] VARCHAR(23) CONSTRAINT tblPaymentCheckFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Project ID] INT CONSTRAINT tblPaymentCheckFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
+	[Compensation Date] DATE,
+	[Check Payment] VARCHAR(23),
+	[Amount] FLOAT,
+	CONSTRAINT tblPaymentCheckPK PRIMARY KEY ([Land Owner ID],[Project ID]) )
+
