@@ -106,3 +106,10 @@ CREATE TABLE tblHouse(
 CREATE TABLE tblBLDGMaterial( 
 	[BLDGMterial Name] VARCHAR(23) CONSTRAINT tblBLDGMaterialPK PRIMARY KEY ,
 	[Current Price] FLOAT)
+
+--CREATE BUILDING MATERIAL BUILDS HOUSE TABLE
+CREATE TABLE tblBLDGMaterialBuildsHouse( 
+	[BLDGMterial Name] VARCHAR(23)  CONSTRAINT tblBLDGMaterialBuildsHouseFK1 FOREIGN KEY REFERENCES Property.tblBLDGMaterial([BLDGMterial Name]),
+	[Quantity] INT,
+	[House ID] INT CONSTRAINT tblBLDGMaterialBuildsHouseFK2 FOREIGN KEY REFERENCES Property.tblHouse([House ID]),
+	CONSTRAINT tblBLDGMaterialBuildsHousePK PRIMARY KEY ([BLDGMterial Name],[House ID]))
