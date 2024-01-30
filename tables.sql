@@ -249,3 +249,12 @@ CREATE TABLE tblTeam(
 	[Number of Member] 	INT	
 	 )
 
+--CREATE GROUP REABILITATES ON TABLE 
+CREATE TABLE tblTeamRehabilitatesOn(
+    [Land Owner ID] INT CONSTRAINT tblGroupRehabilitatesOnFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Managed By] VARCHAR(23) CONSTRAINT tblGroupRehabilitatesOnFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Team Name] VARCHAR(23) CONSTRAINT tblGroupRehabilitatesOnFK3 FOREIGN KEY REFERENCES Rehabilitation.tblTeam([Team Name]),
+	[Expert Advice] VARCHAR(MAX),
+	[Governmental Budget Support] FLOAT,
+	CONSTRAINT tblTeamRehabilitatesOnPK PRIMARY KEY ([Land Owner ID], [Team Name]))
+
