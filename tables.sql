@@ -1,15 +1,15 @@
 
+
 --CREATE ADDRESS TABLE
-CREATE TABLE tblAddress ( 
+CREATE TABLE LandOwner.tblAddress ( 
 	[Region] VARCHAR(23) DEFAULT 'Amhara',
 	[Zone] VARCHAR(23),
 	[Wereda] VARCHAR(23),
 	[Kebele] VARCHAR(23),
 	[Sub Kebele] VARCHAR(23) CONSTRAINT tblAddressPK PRIMARY KEY )
 
-
 --CREATE LAND OWNER TABLE 
-CREATE TABLE tblLandOwner(
+CREATE TABLE LandOwner.tblLandOwner(
 	[Land Owner ID] INT CONSTRAINT tblLandOwnerPK PRIMARY KEY,
 	[First Name] VARCHAR(23),
 	[Last Name] VARCHAR (23),
@@ -18,7 +18,6 @@ CREATE TABLE tblLandOwner(
 	[Phone Number] INT UNIQUE,
 	[Photo] VARBINARY(MAX),
 	[Sub Kebele] VARCHAR (23) CONSTRAINT tblLandOwnerFK1 FOREIGN KEY REFERENCES LandOwner.tblAddress([Sub Kebele]))
-
 
 
 --CREATING LAND TABLE
@@ -126,7 +125,7 @@ CREATE TABLE tblProject(
 CREATE TABLE tblResponsibility([Job Title] VARCHAR(23) CONSTRAINT tblResponsibilityPK PRIMARY KEY )
 
 --CREATE FAMILY MEMEBER TABLE
-CREATE TABLE tblFamilyMember(
+CREATE TABLE LandOwner.tblFamilyMember(
 	[Member ID] INT ,
 	[First Name] VARCHAR(23),
 	[Last Name] VARCHAR (23),
@@ -137,6 +136,7 @@ CREATE TABLE tblFamilyMember(
 	[Photo] VARBINARY(MAX),
 	[Land Owner ID] INT CONSTRAINT tblFamilyMemberFK FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	CONSTRAINT tblFamilyMemberPK PRIMARY KEY([Member ID],[Land Owner ID]))
+
 
 --CREATE PRIVATE WORK TABLE 
 CREATE TABLE tblPrivateWork (
