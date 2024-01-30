@@ -137,3 +137,12 @@ CREATE TABLE tblFamilyMember(
 	[Photo] VARBINARY(MAX),
 	[Land Owner ID] INT CONSTRAINT tblFamilyMemberFK FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	CONSTRAINT tblFamilyMemberPK PRIMARY KEY([Member ID],[Land Owner ID]))
+
+--CREATE PRIVATE WORK TABLE 
+CREATE TABLE tblPrivateWork (
+	[PIntersted Job Type] VARCHAR(23),
+	[Governmental Budget Support] FLOAT ,
+	[Expert Advice] VARCHAR(MAX) ,
+	[Land Owner ID] INT CONSTRAINT tblPrivateWorkFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Managed By] VARCHAR(23) CONSTRAINT tblPrivateWorkFK2 FOREIGN KEY REFERENCES staff.tblResponsibility ([Job Title]),
+	CONSTRAINT tblPrivateWorkPK PRIMARY KEY ([Land Owner ID]) )
