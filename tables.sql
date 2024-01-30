@@ -45,4 +45,9 @@ CREATE TABLE tblLandGivesCrop(
 	[Land ID]INT CONSTRAINT tblLandGivesCropFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
 	CONSTRAINT tblLandGivesCropcropPK PRIMARY KEY ([Crop Name],[Land ID])
 	)
-	
+
+--CREATING NON PRODUCTIVE PLANT TABLE
+CREATE TABLE tblNonProductivePlants( 
+	[Plant Name] VARCHAR(23) CONSTRAINT tblNonProductivePlantsPK PRIMARY KEY,
+	[Current Price] FLOAT)
+
