@@ -125,3 +125,15 @@ CREATE TABLE tblProject(
 
 CREATE TABLE tblResponsibility([Job Title] VARCHAR(23) CONSTRAINT tblResponsibilityPK PRIMARY KEY )
 
+--CREATE FAMILY MEMEBER TABLE
+CREATE TABLE tblFamilyMember(
+	[Member ID] INT ,
+	[First Name] VARCHAR(23),
+	[Last Name] VARCHAR (23),
+	[Gender] CHAR,
+	[Relationship] VARCHAR (23),
+	[Birth Date] DATE,
+	[Phone Number] INT UNIQUE,
+	[Photo] VARBINARY(MAX),
+	[Land Owner ID] INT CONSTRAINT tblFamilyMemberFK FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	CONSTRAINT tblFamilyMemberPK PRIMARY KEY([Member ID],[Land Owner ID]))
