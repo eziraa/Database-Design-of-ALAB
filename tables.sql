@@ -146,3 +146,10 @@ CREATE TABLE tblPrivateWork (
 	[Land Owner ID] INT CONSTRAINT tblPrivateWorkFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	[Managed By] VARCHAR(23) CONSTRAINT tblPrivateWorkFK2 FOREIGN KEY REFERENCES staff.tblResponsibility ([Job Title]),
 	CONSTRAINT tblPrivateWorkPK PRIMARY KEY ([Land Owner ID]) )
+
+--CREATE RPRDIRACTORATE
+CREATE TABLE tblRPRDirectorate (
+[RPR Directorate Name] VARCHAR(70) CONSTRAINT tblRPRDirectoratePK PRIMARY KEY ,
+[Email] VARCHAR(70) UNIQUE,
+[Phone Number] INT UNIQUE)
+
