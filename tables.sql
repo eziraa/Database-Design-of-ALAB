@@ -93,3 +93,11 @@ CREATE TABLE tblMovableProperty(
 	[Recovery Expense] FLOAT ,
 	[Land ID] INT CONSTRAINT tblMovablePropertyFK FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
 	CONSTRAINT tblMovablePropertyPK PRIMARY KEY ([Land ID] ,[Property Name]))
+
+--CREATE HOUSE TABLE
+CREATE TABLE tblHouse(
+	[House ID] INT CONSTRAINT tblHousePK PRIMARY KEY ,
+	[Labour Quantity] INT ,
+	[Current labour Cost] FLOAT ,
+	[Land ID] INT CONSTRAINT tblHouseFK FOREIGN KEY REFERENCES Property.tblLand([Land ID]))
+	
