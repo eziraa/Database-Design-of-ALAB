@@ -51,3 +51,13 @@ CREATE TABLE tblNonProductivePlants(
 	[Plant Name] VARCHAR(23) CONSTRAINT tblNonProductivePlantsPK PRIMARY KEY,
 	[Current Price] FLOAT)
 
+--CREATING NON PRODUCTIVE PLANT TABLE
+CREATE TABLE tblLandGrowsNonProPlants( 
+	[Plant Name] VARCHAR(23) CONSTRAINT tblLandGrowsNonProPlantsFK1 FOREIGN KEY REFERENCES
+	Property.tblNonProductivePlants([Plant Name]),
+	[Quantity] INT ,
+	[Growth Expense] FLOAT , 
+	[Preservation Expense] FLOAT ,
+	[Land ID]INT CONSTRAINT tblLandGrowsNonProPlantsFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
+	CONSTRAINT tblLandGrowsNonProPlantsPK PRIMARY KEY([Plant Name],[land ID]))
+
