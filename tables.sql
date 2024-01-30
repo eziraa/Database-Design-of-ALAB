@@ -82,3 +82,14 @@ CREATE TABLE tblLandGrowsProdPlants(
 	[Preservation Expense] FLOAT,
 	[Land ID] INT CONSTRAINT tblLandGrowsProdPlantsFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
 	CONSTRAINT tblLandGrowsProdPlantsPK PRIMARY KEY([Plant Name],[Land ID]))
+
+--CREATET MOVABLE PROPERTY TABLE
+
+CREATE TABLE tblMovableProperty(
+	[Property Name] VARCHAR(23) ,
+	[Uprooting Expense] FLOAT ,
+	[Transportation Expense] FLOAT ,
+	[Installation Expense] FLOAT ,
+	[Recovery Expense] FLOAT ,
+	[Land ID] INT CONSTRAINT tblMovablePropertyFK FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
+	CONSTRAINT tblMovablePropertyPK PRIMARY KEY ([Land ID] ,[Property Name]))
