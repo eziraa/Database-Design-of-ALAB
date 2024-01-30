@@ -153,3 +153,17 @@ CREATE TABLE tblRPRDirectorate (
 [Email] VARCHAR(70) UNIQUE,
 [Phone Number] INT UNIQUE)
 
+
+--CREATE EMPLOYEE TABLE
+CREATE TABLE  tblEmployee(
+	[Employee ID] INT CONSTRAINT tblEpmloyee PRIMARY KEY ,
+	[First Name] VARCHAR(23),
+	[Last Name] VARCHAR (23),
+	[Gender] CHAR,
+	[Phone Number] INT UNIQUE,
+	[Photo] VARBINARY(MAX),
+	[Email] VARCHAR(23) UNIQUE,
+	[RPR Director Name] VARCHAR(70) CONSTRAINT tblEpmloyeeFK1 FOREIGN KEY REFERENCES staff.tblRPRDirectorate([RPR Directorate Name]),
+	[Job Title] VARCHAR(23) CONSTRAINT tblEpmloyeeFK2 FOREIGN KEY REFERENCES staff.tblResponsibility ([Job Title]))
+
+
