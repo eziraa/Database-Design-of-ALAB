@@ -281,3 +281,10 @@ CREATE TABLE tblPrioritizedLandOwner(
 	[Prioritized By] VARCHAR(23) CONSTRAINT tblPrioritizedLandOwnerFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
 	CONSTRAINT tblPrioritizedLandOwnerPK   PRIMARY KEY ([land Owner ID])
 	)
+
+--CREATE ACCOUNT TABLE
+CREATE TABLE tblAccount(
+	[Land Owner ID] INT CONSTRAINT tblAccountFK1  FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Account Number] INT UNIQUE,
+	CONSTRAINT tblAccountPK  PRIMARY KEY ([Land Owner ID])
+)
