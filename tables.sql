@@ -265,3 +265,10 @@ CREATE TABLE tblTotalCompensation(
    [Land Owner ID] INT CONSTRAINT tblTotalCompensationFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
    [Project ID] INT CONSTRAINT tblTotalCompensationFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]), 
    CONSTRAINT tblTotalCompensationPK PRIMARY KEY ([Land Owner ID],[Project ID]))
+
+--CREATE InterestRequest TABLE
+CREATE TABLE tblInterestRequest(
+	[Interest Name] VARCHAR(23) ,
+	[Land Owner ID] INT CONSTRAINT InterestRequestFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([land Owner ID]),
+	[Requested By] VARCHAR(23) CONSTRAINT InterestRequestFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]), 
+	CONSTRAINT tblInterestRequestPK PRIMARY KEY ([Land Owner ID],[Interest Name]))
