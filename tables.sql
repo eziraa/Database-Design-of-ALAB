@@ -258,3 +258,10 @@ CREATE TABLE tblTeamRehabilitatesOn(
 	[Governmental Budget Support] FLOAT,
 	CONSTRAINT tblTeamRehabilitatesOnPK PRIMARY KEY ([Land Owner ID], [Team Name]))
 
+--CREATE TOTAL COMPENSATION  TABLE
+CREATE TABLE tblTotalCompensation(
+   [Amount] FLOAT ,
+   [Compensation Date] DATE ,
+   [Land Owner ID] INT CONSTRAINT tblTotalCompensationFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+   [Project ID] INT CONSTRAINT tblTotalCompensationFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]), 
+   CONSTRAINT tblTotalCompensationPK PRIMARY KEY ([Land Owner ID],[Project ID]))
