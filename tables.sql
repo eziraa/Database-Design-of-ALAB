@@ -190,3 +190,14 @@ CREATE TABLE tblPaymentCheck(
 	[Amount] FLOAT,
 	CONSTRAINT tblPaymentCheckPK PRIMARY KEY ([Land Owner ID],[Project ID]) )
 
+
+--CREATE NOTIFY LAND OWNER TABLE
+CREATE TABLE tblNotifyLandOwner (
+	[Notification Date] DATE,
+	[Recieved Or Not] VARCHAR(23),
+	[Notification Reason] VARCHAR(23),
+	[Land Owner ID] INT CONSTRAINT tblNotifyLandOwnerFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Notified By] VARCHAR(23) CONSTRAINT tblNotifyLandOwnerFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Project ID] INT CONSTRAINT tblNotifyLandOwnerFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
+	CONSTRAINT tblNotifyLandOwnerPK PRIMARY KEY ([Land Owner ID],[Notification Reason],[Project ID]) )
+
