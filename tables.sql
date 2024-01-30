@@ -18,3 +18,15 @@ CREATE TABLE tblLandOwner(
 	[Phone Number] INT UNIQUE,
 	[Photo] VARBINARY(MAX),
 	[Sub Kebele] VARCHAR (23) CONSTRAINT tblLandOwnerFK1 FOREIGN KEY REFERENCES LandOwner.tblAddress([Sub Kebele]))
+
+
+
+--CREATING LAND TABLE
+CREATE TABLE tblLand (
+	[Land ID] INT CONSTRAINT tblLandPK PRIMARY KEY,
+	[Land Type] VARCHAR(23),
+	[Land Use] VARCHAR(23),
+	[Land Area] FLOAT ,
+	[Sub Kebele]VARCHAR(23) CONSTRAINT tblLandFK1  FOREIGN KEY REFERENCES LandOwner.tblAddress([Sub Kebele]),
+	[Land Owner ID] INT CONSTRAINT tblLandFK2 FOREIGN KEY REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	)
