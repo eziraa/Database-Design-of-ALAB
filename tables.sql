@@ -36,4 +36,13 @@ CREATE TABLE tblLand (
 	[Crop Name] VARCHAR(23) CONSTRAINT cropPK PRIMARY KEY ([Crop Name]) ,
 	[Current Price] FLOAT )
 
-
+--CREATING LANDGIVESCROP TABLE
+CREATE TABLE tblLandGivesCrop( 
+	[Crop Name] VARCHAR(23)  CONSTRAINT tblLandGivesCropFK1 FOREIGN KEY REFERENCES Property.tblCrop([Crop Name]),
+	[Hervest QPerH of This Year] FLOAT ,
+	[Hervest QPerH of Last Year] FLOAT ,
+	[Hervest QPerH Two Year Ago] FLOAT ,
+	[Land ID]INT CONSTRAINT tblLandGivesCropFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
+	CONSTRAINT tblLandGivesCropcropPK PRIMARY KEY ([Crop Name],[Land ID])
+	)
+	
