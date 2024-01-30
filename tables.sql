@@ -201,3 +201,13 @@ CREATE TABLE tblNotifyLandOwner (
 	[Project ID] INT CONSTRAINT tblNotifyLandOwnerFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
 	CONSTRAINT tblNotifyLandOwnerPK PRIMARY KEY ([Land Owner ID],[Notification Reason],[Project ID]) )
 
+
+--CREATE MINUTE DOCUMNEENT TABLE
+CREATE TABLE tblMinuteDocument(
+	[Check Presense] VARCHAR (23),
+	[Discussion Date] DATE,
+	[Document Type] VARCHAR(32),
+	[Land Owner ID] INT CONSTRAINT tblMinuteDocumentFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
+	[Held By] VARCHAR(23) CONSTRAINT tblMinuteDocumentFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
+	[Project ID] INT CONSTRAINT tblMinuteDocumentFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
+	CONSTRAINT tblMinuteDocumentPK PRIMARY KEY ([Land Owner ID],[Document Type],[Project ID]))
