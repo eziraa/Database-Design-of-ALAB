@@ -231,3 +231,13 @@ CREATE TABLE tblEstimatePrice(
 	[Estimated by] VARCHAR(23) CONSTRAINT tblEstimatePriceFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
 	[Project ID] INT CONSTRAINT tblEstimatePriceFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
 	CONSTRAINT tblEstimatePricesPK PRIMARY KEY ([Land Owner ID],[Project ID]))
+
+--CREATE TABLE PRIORITY LAND OWNERS
+
+CREATE TABLE tblPriority(
+	[City Land Area] FLOAT ,
+	[Reason for City Land] VARCHAR(23),
+	[Disability] VARCHAR(23),
+	[Land Owner ID] INT CONSTRAINT tblPriorityFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID])
+	CONSTRAINT tblPriorityPK PRIMARY KEY ([Land Owner ID])
+)
