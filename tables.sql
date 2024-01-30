@@ -113,3 +113,9 @@ CREATE TABLE tblBLDGMaterialBuildsHouse(
 	[Quantity] INT,
 	[House ID] INT CONSTRAINT tblBLDGMaterialBuildsHouseFK2 FOREIGN KEY REFERENCES Property.tblHouse([House ID]),
 	CONSTRAINT tblBLDGMaterialBuildsHousePK PRIMARY KEY ([BLDGMterial Name],[House ID]))
+
+--CREATE PROJECT TABLE
+CREATE TABLE tblProject(
+	[Project ID ]INT CONSTRAINT tblProjectPK PRIMARY KEY IDENTITY(1, 1),
+	[Project Name] VARCHAR(23),
+	[Project Type] VARCHAR(25))
