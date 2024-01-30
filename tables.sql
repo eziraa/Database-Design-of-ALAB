@@ -119,3 +119,9 @@ CREATE TABLE tblProject(
 	[Project ID ]INT CONSTRAINT tblProjectPK PRIMARY KEY IDENTITY(1, 1),
 	[Project Name] VARCHAR(23),
 	[Project Type] VARCHAR(25))
+
+
+--CREATE Responsibility TABLE
+
+CREATE TABLE tblResponsibility([Job Title] VARCHAR(23) CONSTRAINT tblResponsibilityPK PRIMARY KEY )
+
