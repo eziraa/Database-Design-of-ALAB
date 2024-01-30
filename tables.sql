@@ -69,3 +69,16 @@ CREATE TABLE tblProductivePlants(
 	[High Level Current Price] FLOAT ,
 	[Middel Level Current Price] FLOAT ,
 	[low Level Current Price] FLOAT	)
+
+
+--CREATING LAND GIVES PRODUCTIVE PLANTS TABLE
+
+CREATE TABLE tblLandGrowsProdPlants(
+	[Plant Name] VARCHAR(23) CONSTRAINT tblLandGrowsProPlantsFK1 FOREIGN KEY REFERENCES Property.tblProductivePlants([Plant Name]) ,
+	[High Level Quantity] INT,
+	[Middle Level Quantity] INT,
+	[Low Level Quantity] INT,
+	[Growth Expense] FLOAT, 
+	[Preservation Expense] FLOAT,
+	[Land ID] INT CONSTRAINT tblLandGrowsProdPlantsFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
+	CONSTRAINT tblLandGrowsProdPlantsPK PRIMARY KEY([Plant Name],[Land ID]))
