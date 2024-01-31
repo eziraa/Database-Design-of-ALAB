@@ -575,3 +575,17 @@ FROM Property.tblLand LA, LandOwner.tblAddress AD
 WHERE LA.[Sub Kebele] = AD.[Sub Kebele] AND AD.[Sub Kebele] = @subkebele
 END
 GO
+
+
+-- TO DISPLAY FAMILY MEMBERS OF LANDOWNERS
+GO
+CREATE PROCEDURE LandOwner.spFamilyMembers(@landOwnerID INT)
+AS
+BEGIN 
+	SELECT	[Member ID],FM.[First Name] ,FM.[Last Name], FM.[Gender], [Relationship],FM.[Birth Date] ,
+	FM.[Phone Number],FM.[Photo], LO.[First Name], LO.[Last Name],LO.[Gender], LO.[Phone Number],[Region],[Zone],[Wereda], [Kebele],
+	AD.[Sub Kebele] FROM tblFamilyMember FM, LandOwner.tblLandOwner LO, LandOwner.tblAddress AD WHERE LO.[Sub Kebele] = AD.[Sub Kebele]
+	AND LO.[Land Owner ID] = @landOwnerID AND LO.[Land Owner ID] = FM.[Land Owner ID] 
+END
+GO
+
