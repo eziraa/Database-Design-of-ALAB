@@ -354,3 +354,13 @@ PT.[City Land Area], PT.[Reason for City Land], PT.Disability
 FROM Rehabilitation.tblPriority PT, LandOwner.tblLandOwner LO
 WHERE  LO.[Land Owner ID] = PT.[Land Owner ID] 
 GO
+
+--CREATE VIEW TO SEE THE PRIORITIZED MEMBER
+GO
+CREATE VIEW Rehabilitation.vwPrioritizedLandowner
+AS
+SELECT  LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name',   LO.[Land Owner ID],PL.[Compensated Area of City Land] 
+,[Prioritized By] FROM Rehabilitation.tblPrioritizedLandOwner PL, LandOwner.tblLandOwner LO
+WHERE  LO.[Land Owner ID] = PL.[Land Owner ID] 
+GO
+
