@@ -589,3 +589,17 @@ BEGIN
 END
 GO
 
+-- grouping the landowners
+GO
+CREATE PROCEDURE Rehabilitation.spFormTeam(@lamdOwnerID INT,@expertAdvice VARCHAR(MAX) ,@teamName VARCHAR(23),@GovernmentBudgetSupport FLOAT)
+AS
+BEGIN TRANSACTION T1
+	IF NOT EXISTS ( SELECT * FROM Rehabilitation.tblTeam WHERE [Team Name] = @teamName )
+	INSERT INTO Rehabilitation.tblTeam([Team Name]) VALUES (@teamName) 
+	INSERT INTO Rehabilitation.tblTeamRehabilitatesOn VALUES (@lamdOwnerID,'Rehabilitator', @teamName, @expertAdvice , @GovernmentBudgetSupport)
+IF(@@ERROR<>0)
+	ROLLBACK TRANSACTION T1
+COMMIT
+GO
+
+
