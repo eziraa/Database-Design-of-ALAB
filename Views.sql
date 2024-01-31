@@ -155,3 +155,26 @@ WHERE
   AND L.[Land ID] = H.[Land ID] 
   AND LA.[Land Owner ID] = VN.[Land Owner ID] 
   GO
+
+    --CREATE VIEW TO SEE THE COUNTED HOUSE BUILDING MATERIAL
+  GO
+  CREATE VIEW CountProperty.vwSeeCountedBLDG AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  H.[House ID], 
+  BL.Quantity, 
+  BLDG.[Current Price], 
+  bl.[BLDGMterial Name] 
+FROM 
+  Property.tblHouse H, 
+  Property.tblBLDGMaterial BLDG, 
+  Property.tblBLDGMaterialBuildsHouse BL, 
+  Property.tblLand L, 
+  LandOwner.tblLandOwner LA 
+WHERE 
+  L.[Land Owner ID] = LA.[Land Owner ID] 
+  AND L.[Land ID] = H.[Land ID] 
+  AND H.[House ID] = BL.[House ID] 
+  AND BL.[BLDGMterial Name] = BLDG.[BLDGMterial Name] 
+  GO
