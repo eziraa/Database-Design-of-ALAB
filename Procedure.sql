@@ -249,4 +249,27 @@ BEGIN
 END
 GO
 
+--create  procedure to check count
+GO
+CREATE PROCEDURE CountProperty.spCheckcounting(@checkcounting VARCHAR(23), @landOwnerID INT, @projectID INT, @RepresentativeID INT)
+AS
+BEGIN
+	IF EXISTS (SELECT * FROM Request.tblNotifyLandOwner WHERE [Land Owner ID] = @LandOwnerId AND [Project ID] = @projectID)
+
+	IF NOT EXISTS ( SELECT * FROM Request.tblNotifyLandOwner WHERE [Land Owner ID] = @RepresentativeID ) 
+	IF NOT EXISTS ( SELECT * FROM CountProperty.tblCountProperties WHERE [Land Owner ID] = @LandOwnerId ) 
+	BEGIN
+		INSERT INTO CountProperty.tblCountProperties VALUES(getDate(), @checkcounting , @landOwnerID,
+		'Property Counter', @projectID,@RepresentativeID)
+	END
+	ELSE
+	RAISERROR('The record  already  counted ',16,1)
+	ELSE
+	RAISERROR('This land owner can not be representative because he is the owner of the land  ',16,1)
+	ELSE
+	RAISERROR('The record is not found in the notification table',16,1)
+	
+END
+GO
+
 
