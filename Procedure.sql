@@ -421,3 +421,11 @@ IF(@@ERROR<>0)
 
 COMMIT 
 GO
+
+--CREATE  STORE PROCEDURE TO CHECK PAYMENT CHECK
+GO
+CREATE PROCEDURE Compensation.spPaymentCheck(@projectName VARCHAR(23))
+AS 
+SELECT * FROM Compensation.vwPaymentCheck 
+WHERE [Project Name] = @projectName
+GO
