@@ -21,7 +21,7 @@ CREATE TABLE LandOwner.tblLandOwner(
 
 
 --CREATING LAND TABLE
-CREATE TABLE tblLand (
+CREATE TABLE Property.tblLand (
 	[Land ID] INT CONSTRAINT tblLandPK PRIMARY KEY,
 	[Land Type] VARCHAR(23),
 	[Land Use] VARCHAR(23),
@@ -31,12 +31,12 @@ CREATE TABLE tblLand (
 	)
 
 --CREATING CROP TABLE
-  CREATE TABLE tblCrop( 
+  CREATE TABLE Property.tblCrop( 
 	[Crop Name] VARCHAR(23) CONSTRAINT cropPK PRIMARY KEY ([Crop Name]) ,
 	[Current Price] FLOAT )
 
 --CREATING LANDGIVESCROP TABLE
-CREATE TABLE tblLandGivesCrop( 
+CREATE TABLE Property.tblLandGivesCrop( 
 	[Crop Name] VARCHAR(23)  CONSTRAINT tblLandGivesCropFK1 FOREIGN KEY REFERENCES Property.tblCrop([Crop Name]),
 	[Hervest QPerH of This Year] FLOAT ,
 	[Hervest QPerH of Last Year] FLOAT ,
@@ -44,14 +44,15 @@ CREATE TABLE tblLandGivesCrop(
 	[Land ID]INT CONSTRAINT tblLandGivesCropFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
 	CONSTRAINT tblLandGivesCropcropPK PRIMARY KEY ([Crop Name],[Land ID])
 	)
+	
 
 --CREATING NON PRODUCTIVE PLANT TABLE
-CREATE TABLE tblNonProductivePlants( 
+CREATE TABLE Property.tblNonProductivePlants( 
 	[Plant Name] VARCHAR(23) CONSTRAINT tblNonProductivePlantsPK PRIMARY KEY,
 	[Current Price] FLOAT)
 
---CREATING LAND GROWS NON PRODUCTIVE PLANT TABLE
-CREATE TABLE tblLandGrowsNonProPlants( 
+--CREATING NON PRODUCTIVE PLANT TABLE
+CREATE TABLE Property.tblLandGrowsNonProPlants( 
 	[Plant Name] VARCHAR(23) CONSTRAINT tblLandGrowsNonProPlantsFK1 FOREIGN KEY REFERENCES
 	Property.tblNonProductivePlants([Plant Name]),
 	[Quantity] INT ,
@@ -60,19 +61,17 @@ CREATE TABLE tblLandGrowsNonProPlants(
 	[Land ID]INT CONSTRAINT tblLandGrowsNonProPlantsFK2 FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
 	CONSTRAINT tblLandGrowsNonProPlantsPK PRIMARY KEY([Plant Name],[land ID]))
 
-
 --CREATING PRODUCTIVE PLANTS TABLE
 
-CREATE TABLE tblProductivePlants(
+CREATE TABLE Property.tblProductivePlants(
 	[Plant Name] VARCHAR(23) CONSTRAINT tblProductivePlantsPK PRIMARY KEY,
 	[High Level Current Price] FLOAT ,
 	[Middel Level Current Price] FLOAT ,
 	[low Level Current Price] FLOAT	)
 
-
 --CREATING LAND GIVES PRODUCTIVE PLANTS TABLE
 
-CREATE TABLE tblLandGrowsProdPlants(
+CREATE TABLE Property.tblLandGrowsProdPlants(
 	[Plant Name] VARCHAR(23) CONSTRAINT tblLandGrowsProPlantsFK1 FOREIGN KEY REFERENCES Property.tblProductivePlants([Plant Name]) ,
 	[High Level Quantity] INT,
 	[Middle Level Quantity] INT,
@@ -84,7 +83,7 @@ CREATE TABLE tblLandGrowsProdPlants(
 
 --CREATET MOVABLE PROPERTY TABLE
 
-CREATE TABLE tblMovableProperty(
+CREATE TABLE Property.tblMovableProperty(
 	[Property Name] VARCHAR(23) ,
 	[Uprooting Expense] FLOAT ,
 	[Transportation Expense] FLOAT ,
@@ -93,21 +92,21 @@ CREATE TABLE tblMovableProperty(
 	[Land ID] INT CONSTRAINT tblMovablePropertyFK FOREIGN KEY REFERENCES Property.tblLand([Land ID]),
 	CONSTRAINT tblMovablePropertyPK PRIMARY KEY ([Land ID] ,[Property Name]))
 
+
 --CREATE HOUSE TABLE
-CREATE TABLE tblHouse(
+CREATE TABLE Property.tblHouse(
 	[House ID] INT CONSTRAINT tblHousePK PRIMARY KEY ,
 	[Labour Quantity] INT ,
 	[Current labour Cost] FLOAT ,
 	[Land ID] INT CONSTRAINT tblHouseFK FOREIGN KEY REFERENCES Property.tblLand([Land ID]))
-
-
+	
 --CREATE BUILDING MATERIAL TABLE
-CREATE TABLE tblBLDGMaterial( 
+CREATE TABLE Property.tblBLDGMaterial( 
 	[BLDGMterial Name] VARCHAR(23) CONSTRAINT tblBLDGMaterialPK PRIMARY KEY ,
 	[Current Price] FLOAT)
 
 --CREATE BUILDING MATERIAL BUILDS HOUSE TABLE
-CREATE TABLE tblBLDGMaterialBuildsHouse( 
+CREATE TABLE Property.tblBLDGMaterialBuildsHouse( 
 	[BLDGMterial Name] VARCHAR(23)  CONSTRAINT tblBLDGMaterialBuildsHouseFK1 FOREIGN KEY REFERENCES Property.tblBLDGMaterial([BLDGMterial Name]),
 	[Quantity] INT,
 	[House ID] INT CONSTRAINT tblBLDGMaterialBuildsHouseFK2 FOREIGN KEY REFERENCES Property.tblHouse([House ID]),
