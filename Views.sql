@@ -268,3 +268,16 @@ FROM
 WHERE 
   LO.[Land Owner ID] = CP.[Representative ID] 
   GO
+
+  -- To see all counted movable property 
+GO
+CREATE VIEW CountProperty.vwSeeAllMovableProperty
+AS 
+SELECT   [First Name] + ' ' + [Last NAme] as 'Land Owner Name', LO.[Land Owner ID], [Project Name], [Property Name],
+	[Uprooting Expense] ,[Transportation Expense] ,[Installation Expense] ,[Recovery Expense]
+FROM Property.tblMovableProperty MP, LandOwner.tblLandOwner LO, Request.tblProject PR, Property.tblLand LA, 
+Request.tblProReqToLand PL
+
+WHERE LO.[Land Owner ID] = LA.[Land Owner ID] AND MP.[Land ID] = LA.[Land ID] AND PR.[Project ID ] = PL.[Project ID]
+AND MP.[Land ID] = LA.[Land ID]
+GO
