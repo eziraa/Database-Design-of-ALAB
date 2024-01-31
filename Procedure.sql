@@ -457,3 +457,17 @@ SELECT * FROM Rehabilitation.vwSeePriority
 WHERE [Land Owner ID] IN (SELECT [Land Owner ID] FROM Compensation.vwSeeTotalCompensation WHERE 
 [Project Name] = @projectName)
 GO
+
+-- prioritizing evacuees by inserting valued to prioritize table
+GO
+CREATE PROCEDURE Rehabilitation.spInsertPriority(@cityLanArea FLOAT, @reasonForLand VARCHAR(30), @disablility VARCHAR(30), @landOwnerID INT)
+AS
+BEGIN
+IF EXISTS (SELECT * FROM Compensation.tblAccount WHERE [Land Owner ID] = @landOwnerID)
+	BEGIN
+	INSERT INTO Rehabilitation.tblPriority VALUES(@cityLanArea, @reasonForLand, @disablility, @landOwnerID)
+	END
+ELSE
+	RAISERROR('Land owner not applicable.', 16, 1)
+END
+GO
