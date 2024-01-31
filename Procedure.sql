@@ -496,3 +496,22 @@ IF(@@ERROR<>0)
 	ROLLBACK TRANSACTION T1
 COMMIT
 GO
+
+
+
+
+-- CREATE PROCEDURE Update interest request table
+
+GO
+CREATE PROCEDURE Rehabilitation.spRequestInterest(@interest VARCHAR(23), @landOwnID INT)
+AS
+BEGIN
+IF EXISTS (SELECT * FROM Compensation.tblAccount WHERE [Land Owner ID] = @landOwnID)
+	BEGIN
+	INSERT INTO Rehabilitation.tblInterestRequest VALUES(@interest, @landOwnID, 'Rehabilitator') 
+	END
+ELSE
+	RAISERROR('Land owner not applicable.', 16, 1)
+END
+
+GO
