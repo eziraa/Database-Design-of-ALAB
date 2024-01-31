@@ -202,7 +202,7 @@ CREATE TABLE Request.tblNotifyLandOwner (
 
 
 --CREATE MINUTE DOCUMNEENT TABLE
-CREATE TABLE tblMinuteDocument(
+CREATE TABLE CountProperty.tblMinuteDocument(
 	[Check Presense] VARCHAR (23),
 	[Discussion Date] DATE,
 	[Document Type] VARCHAR(32),
@@ -212,7 +212,7 @@ CREATE TABLE tblMinuteDocument(
 	CONSTRAINT tblMinuteDocumentPK PRIMARY KEY ([Land Owner ID],[Document Type],[Project ID]))
 
 --CREATE COUNT PROPERTY TABLE
-CREATE TABLE tblCountProperties(
+CREATE TABLE CountProperty.tblCountProperties(
 	[Counting Date] DATE,
 	[Check Counting] VARCHAR(23),
 	[Land Owner ID] INT CONSTRAINT tblCountPropertiesFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
