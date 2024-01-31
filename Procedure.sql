@@ -150,3 +150,22 @@ GO
  AS
  SELECT * FROM CountProperty.vwMinutedocument  WHERE [Document Type] = @type AND [Project Name] = @projectName
  GO
+
+ -- create procedure to update quantity of crops QperH of 2years ago, last, and this year 
+
+GO
+CREATE PROCEDURE CountProperty.spUpdateCropQuantity (@cropName VARCHAR(23), @last2 FLOAT, @last FLOAT, @this FLOAT, @LandID INT)
+AS
+BEGIN
+  IF EXISTS (SELECT * FROM Property.tblCrop WHERE [Crop Name] = @cropName)
+	  IF NOT EXISTS (SELECT * FROM Property.tblLandGivesCrop WHERE [Crop Name] = @cropName AND [Land ID] = @LandID)
+	  INSERT INTO Property.tblLandGivesCrop VALUES(@cropName, @this,  @last,  @last2 , @LandID  )
+	  ELSE
+	
+	  RAISERROR('The CROP is already counted ',16,1)
+
+  ELSE
+	RAISERROR('The CROP is not found in the DATABASE ',16,1)
+
+END
+GO
