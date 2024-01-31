@@ -142,3 +142,11 @@ BEGIN
 	RAISERROR('The LAND OWNER  IS not notified ',16,1)
 END
 GO
+
+
+--CREATE STORE PROCEDURE TO SEE THE MINUTE DOCUMENT INFORMATON BY PASSING ITS TYPE AND PROJECT NAME
+ GO
+ CREATE PROCEDURE CountProperty.spSeeMinuteDocument(@type VARCHAR(23), @projectName VARCHAR(23))
+ AS
+ SELECT * FROM CountProperty.vwMinutedocument  WHERE [Document Type] = @type AND [Project Name] = @projectName
+ GO
