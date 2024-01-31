@@ -333,3 +333,14 @@ SELECT * FROM CountProperty.vwSeeAllMovableProperty
 WHERE [Project Name] = @projectName
 END
 GO
+
+
+-- stored procedure to see all counted movable property for a specific project and landowner id
+GO
+CREATE PROCEDURE CountProperty.spSeeMovablePropertyOne(@landOwnID INT, @projectName VARCHAR(34))
+AS
+BEGIN
+SELECT * FROM CountProperty.vwSeeAllMovableProperty 
+WHERE [Project Name] = @projectName AND [Land Owner ID] = @landOwnID
+END
+GO
