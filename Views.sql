@@ -134,3 +134,24 @@ WHERE
   AND NP.[PLant Name] = LNP.[Plant Name] 
   AND LA.[Land Owner ID] = VN.[Land Owner ID] 
  GO
+
+   --CREATE VIEW TO SEE THE HOUSE INFORMATION
+  GO
+  CREATE VIEW CountProperty.vwSeeCountedHouse AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  [Project Name], 
+  [House ID], 
+  [Labour Quantity], 
+  [Current labour Cost] 
+FROM 
+  Property.tblHouse H, 
+  Property.tblLand L, 
+  CountProperty.vwMinutedocument VN, 
+  LandOwner.tblLandOwner LA 
+WHERE 
+  L.[Land Owner ID] = LA.[Land Owner ID] 
+  AND L.[Land ID] = H.[Land ID] 
+  AND LA.[Land Owner ID] = VN.[Land Owner ID] 
+  GO
