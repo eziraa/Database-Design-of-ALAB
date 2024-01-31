@@ -111,3 +111,11 @@ BEGIN
 END
 GO
 
+
+
+--CREATE STORE PROCEDURE TO SEE NOTIFICATION 
+GO
+CREATE PROCEDURE Request.spSeeNotificaton(@reason VARCHAR(23) , @projectName VARCHAR(23))
+AS
+ SELECT * FROM Request.vwNotification WHERE [Notification Reason] = @reason AND [Project Name] = @projectName
+GO
