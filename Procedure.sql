@@ -383,3 +383,24 @@ SELECT * FROM Compensation.vwSeeAccount WHERE [Land Owner ID] IN (SELECT [Land O
 FROM  Compensation.vwSeeTotalCompensation WHERE [Project Name] = @projectName) 
 GO
 
+
+--Create store procedure to verify the estimation result
+GO
+CREATE PROCEDURE Compensation.spVerifyEstimation(@checkEstim VARCHAR(23), @landOwnerID INT, @projectID INT)
+AS   
+BEGIN TRANSACTION T1
+	IF EXISTS (SELECT * FROM Compensation.tblEstimatePrice WHERE [Land Owner ID] = @LandOwnerId AND [Project ID] = @projectID) 
+		BEGIN
+			DECLARE @landid INT
+			SELECT @landid = (SELECT [Land ID] from Property.tblLand WHERE [Land Owner ID] = @landOwnerID)
+			UPDATE  Compensation.tblEstimatePrice SET [Amount] =Compensation.fnTotalComp( @landid)  WHERE [Land Owner ID] = @LandOwnerId 
+			AND [Project ID] = @projectID
+			UPDATE  Compensation.tblEstimatePrice SET [Check Estiamtion ] = @checkEstim  WHERE [Land Owner ID] = @LandOwnerId 
+			AND [Project ID] = @projectID
+		END
+	ELSE
+	RAISERROR('The property is not counted',16,1)
+IF(@@ERROR<>0)
+	ROLLBACK TRANSACTION T1
+COMMIT
+GO
