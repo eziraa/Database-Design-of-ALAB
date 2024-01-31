@@ -616,6 +616,14 @@ GO
  END
  GO
 
+--CREATE PORCEDURE TO SEE PRIORITIZED MEMBER
+GO
+CREATE PROCEDURE Rehabilitation.spPrioritisedMember(@projectName VARCHAR(23))
+AS
+SELECT * FROM Rehabilitation.vwPrioritizedLandowner WHERE  [Land Owner ID] IN (SELECT [Land Owner ID]
+FROM Compensation.vwSeeTotalCompensation WHERE [Project Name] = @projectName)
+GO
+
  
 
 
