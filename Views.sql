@@ -380,3 +380,21 @@ WHERE
  GO
  
 
+  --CREATE VIEW TO SEE LAND OWNERS WHOSE INTEREST IS PRIVATE WORK
+  GO
+  CREATE VIEW Rehabilitation.vwSeePrivateWorker AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  [PIntersted Job Type], 
+  [Governmental Budget Support], 
+  [Expert Advice], 
+  [Managed By] 
+FROM 
+  LandOwner.tblLandOwner L, 
+  Rehabilitation.tblPrivateWork P 
+WHERE 
+  L.[Land Owner ID] = P.[Land Owner ID] 
+GO
+
+
