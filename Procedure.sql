@@ -223,3 +223,14 @@ BEGIN
 END
 GO
 
+--create a procedure to update the labour force quantity and cost the the given house consumed
+
+GO
+CREATE PROCEDURE CountProperty.spUpdatingHouse(@houseID INT, @labQuan INT)
+AS
+BEGIN
+	UPDATE Property.tblHouse SET [Labour Quantity] = @labQuan WHERE [House ID] = @houseID
+END
+GO
+
+
