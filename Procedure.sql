@@ -546,3 +546,21 @@ AD.[Sub Kebele] = @SubKebele
 END 
 GO
 
+
+
+--CREATE PROCEDURE TO SEE THE INFORMATION OF ABOUTS SOMEONE'S FOXED PROPERTY
+
+GO
+CREATE PROCEDURE LandOwner.spFixedPropertyInfo(@landOwnerId INT, @Type VARCHAR(23))
+AS
+BEGIN
+IF (@Type = 'Productive')
+SELECT PP.[Plant Name], [High Level Quantity],[High Level Current Price], [Middle Level Quantity] ,[Middel Level Current Price], [Low Level Quantity], [low Level Current Price],
+ [Growth Expense],[Preservation Expense] FROM Property.tblProductivePlants PP, Property.Property.tblLandGrowsProdPlants LGPP  WHERE PP.[Plant Name] = LGPP.[Plant Name] AND [Land ID] IN (SELECT [Land ID]
+  FROM Property.tblLand WHERE [Land Owner ID] IN (SELECT [Land Owner ID] FROM Property.LandOwner.tblLandOwner WHERE [Land Owner ID] = @landOwnerId))
+ELSE
+SELECT NPP.[Plant Name], [Quantity],[Current Price], [Growth Expense],[Preservation Expense] FROM Property.tblNonProductivePlants NPP , Property.Property.tblLandGrowsNonProPlants LGNPP WHERE 
+ NPP.[Plant Name] = LGNPP.[Plant Name] AND [Land ID] IN (SELECT [Land ID] FROM Property.tblLand WHERE [Land Owner ID] IN (SELECT [Land Owner ID] FROM Property.LandOwner.tblLandOwner WHERE 
+ [Land Owner ID] = @landOwnerId))
+END
+GO
