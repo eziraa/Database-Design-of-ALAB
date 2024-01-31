@@ -300,3 +300,26 @@ BEGIN
 	SELECT * FROM  CountProperty.vwSeeCountedBLDG  WHERE [House ID] in (	SELECT [House ID] FROM  CountProperty.vwSeeCountedHouse WHERE [Project Name] = @projectName and   [Land Owner ID] = @LandOwnerId)	ORDER BY [House ID]
 END
 GO
+
+--create  procedure to updatewhether estimation has been done or not
+GO
+CREATE PROCEDURE Compensation.spMakeEstimation( @landOwnerID INT, @projectID INT)
+AS
+BEGIN
+	IF EXISTS (SELECT * FROM CountProperty.tblCountProperties WHERE [Land Owner ID] = @LandOwnerId AND [Project ID] = @projectID) 
+		IF NOT EXISTS ( SELECT * FROM Compensation.tblEstimatePrice WHERE [Land Owner ID] = @LandOwnerId ) 
+		IF (SELECT Compensation.fnTotalComp( [Land ID] ) from Property.tblLand  WHERE [Land Owner ID] = @landOwnerID) IS NOT NULL
+		BEGIN
+		SELECT * FROM Compensation.tblEstimatePrice
+			INSERT INTO Compensation.tblEstimatePrice ([Estimation Date] , [Amount],[Land Owner ID],[Estimated by],[Project ID]) VALUES  (GETDATE(), Compensation.fnTotalComp( @landOwnerID),
+			@landOwnerID, 'Estimator', @projectID)
+		END
+		ELSE
+		RAISERROR('Required information is not fulfilled',16,1)
+		ELSE
+		RAISERROR('The record  already  estimated ',16,1)
+	ELSE
+	RAISERROR('The property is not counted',16,1)
+	
+END
+GO
