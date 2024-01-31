@@ -447,3 +447,13 @@ CREATE PROCEDURE Compensation.spSeePayment(@projectName VARCHAR(34))
 AS
 SELECT * FROM Compensation.vwProjPaysToLanOwn WHERE [Project Name] = @projectName
 GO
+
+
+--CREATE STOTE PROCEDURE TO SEE THE PRIORITY TABLE
+GO
+CREATE PROCEDURE Rehabilitation.spSeePriority(@projectName VARCHAR(23))
+AS
+SELECT * FROM Rehabilitation.vwSeePriority 
+WHERE [Land Owner ID] IN (SELECT [Land Owner ID] FROM Compensation.vwSeeTotalCompensation WHERE 
+[Project Name] = @projectName)
+GO
