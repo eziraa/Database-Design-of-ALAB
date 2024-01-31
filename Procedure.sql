@@ -10,3 +10,18 @@ BEGIN
 	PRL.[Sub Kebele] = AD.[Sub Kebele] AND [Project Name] = @ProjectName
 END
 GO
+
+
+
+-- CREATING A STORED PROCEDURE TO SEE LAND INFORMATION
+
+GO 
+CREATE PROCEDURE Property.spLandInfo(@SubKebele VARCHAR(23))
+AS
+BEGIN 
+	SELECT [Region],[Zone],[Wereda],[Kebele],AD.[Sub Kebele] ,[First Name] + ' ' +  [Last Name] AS [Land  Owner Name],LO.[Land Owner ID], [Land ID]
+	FROM LandOwner.tblLandOwner LO, LandOwner.tblAddress AD ,Property.tblLand L
+	WHERE LO.[Sub Kebele] = AD.[Sub Kebele] AND L.[Land Owner ID] = LO.[Land Owner ID] AND AD.[Sub Kebele] = @SubKebele
+END 
+GO
+
