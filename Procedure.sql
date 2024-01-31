@@ -471,3 +471,28 @@ ELSE
 	RAISERROR('Land owner not applicable.', 16, 1)
 END
 GO
+
+-- CREATE PROCEDURE TO  prioririze based on age, disability, city land area
+GO
+CREATE PROCEDURE Rehabilitation.spPrioritizedLanOwner
+AS
+BEGIN TRANSACTION T1
+
+	 INSERT INTO Rehabilitation.tblPrioritizedLandOwner SELECT [land Owner ID], Rehabilitation.fnCityLanEligibile([land Owner ID]), 'Rehabilitator' FROM Rehabilitation.tblPriority WHERE 
+	 [Disability] = 'Disable' AND Rehabilitation.fnCalcAge([land Owner ID]) > 65  AND  Rehabilitation.fnCityLanEligibile([land Owner ID]) > 100
+
+	 INSERT INTO Rehabilitation.tblPrioritizedLandOwner SELECT [land Owner ID], Rehabilitation.fnCityLanEligibile([land Owner ID]), 'Rehabilitator' FROM Rehabilitation.tblPriority WHERE 
+	 [Disability] = 'Disable' AND Rehabilitation.fnCalcAge([land Owner ID]) < 65  AND  Rehabilitation.fnCityLanEligibile([land Owner ID]) > 100
+
+	 INSERT INTO Rehabilitation.tblPrioritizedLandOwner SELECT [land Owner ID], Rehabilitation.fnCityLanEligibile([land Owner ID]), 'Rehabilitator' FROM Rehabilitation.tblPriority WHERE 
+	 [Disability] = 'None' AND Rehabilitation.fnCalcAge([land Owner ID]) > 65  AND  Rehabilitation.fnCityLanEligibile([land Owner ID]) > 100
+
+	INSERT INTO Rehabilitation.tblPrioritizedLandOwner SELECT [land Owner ID], Rehabilitation.fnCityLanEligibile([land Owner ID]), 'Rehabilitator' FROM Rehabilitation.tblPriority WHERE 
+	 [Disability] = 'None' AND Rehabilitation.fnCalcAge([land Owner ID]) < 65  AND  Rehabilitation.fnCityLanEligibile([land Owner ID]) > 100
+
+	 INSERT INTO Rehabilitation.tblPrioritizedLandOwner SELECT [land Owner ID], Rehabilitation.fnCityLanEligibile([land Owner ID]), 'Rehabilitator' FROM Rehabilitation.tblPriority 
+      WHERE Rehabilitation.fnCityLanEligibile([land Owner ID]) < 100
+IF(@@ERROR<>0)
+	ROLLBACK TRANSACTION T1
+COMMIT
+GO
