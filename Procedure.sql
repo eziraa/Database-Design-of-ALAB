@@ -169,3 +169,22 @@ BEGIN
 
 END
 GO
+
+
+
+--Create a procedure to  update quantity of nonproductive plants byn entring the the plant name ,growth expense ,preservation expense and the land oreservation expense
+
+GO
+CREATE PROCEDURE CountProperty.spUpdateQuanNonProd (@plantName VARCHAR(23), @quantity INT, @growExp FLOAT, @preserveExp FLOAT, @landID INT)
+AS
+BEGIN
+    IF EXISTS (SELECT * FROM Property.tblNonProductivePlants WHERE [Plant Name] = @plantName)
+		IF NOT EXISTS (SELECT *  FROM Property.tblLandGrowsNonProPlants WHERE [Plant Name] = @plantName AND [Land ID] = @landID)
+		INSERT INTO Property.tblLandGrowsNonProPlants VALUES(@plantName, @quantity, @growExp, @preserveExp, @landID)
+		ELSE
+		RAISERROR('The plant is already counted ',16,1)
+	ELSE
+	RAISERROR('The plant is nor found in the DATABASE ',16,1)
+END
+GO
+
