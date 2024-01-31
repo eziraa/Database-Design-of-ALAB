@@ -81,3 +81,32 @@ WHERE
   AND LC.[Crop Name] = C.[Crop Name] 
   AND LA.[Land Owner ID] = VN.[Land Owner ID]
   GO 
+
+
+  --CREATE VIEW TO SEE COUNTED PRODUCTIVE PLANT
+ GO
+ CREATE VIEW CountProperty.vwSeeCountedPlant AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  [Project Name], 
+  P.[Plant Name], 
+  LP.[High Level Quantity], 
+  p.[High Level Current Price], 
+  LP.[Low Level Quantity], 
+  P.[low Level Current Price], 
+  LP.[Middle Level Quantity], 
+  P.[Middel Level Current Price], 
+  [Preservation Expense] 
+FROM 
+  Property.tblLandGrowsProdPlants LP, 
+  Property.tblProductivePlants P, 
+  CountProperty.vwMinutedocument VN, 
+  Property.tblLand L, 
+  LandOwner.tblLandOwner LA 
+WHERE 
+  L.[Land Owner ID] = LA.[Land Owner ID] 
+  AND L.[Land ID] = LP.[Land ID] 
+  AND LP.[Plant Name] = P.[Plant Name] 
+  AND L.[Land Owner ID] = VN.[Land Owner ID] 
+GO 
