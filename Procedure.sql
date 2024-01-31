@@ -272,4 +272,18 @@ BEGIN
 END
 GO
 
+--CREATE PROCEDURE TO SEE ALL COUNTED PROPERTY
+GO
+CREATE PROCEDURE  CountProperty.spSeeCountedAll(@projectName VARCHAR(23))
+AS
+BEGIN   
+	SELECT * FROM  CountProperty.vwSeeCountedCrop WHERE [Project Name] = @projectName	ORDER BY [Land Owner ID]
+	SELECT * FROM  CountProperty.vwSeeCountedPlant WHERE [Project Name] = @projectName	ORDER BY [Land Owner ID]
+	SELECT * FROM  CountProperty.vwSeeCountedNonProd WHERE [Project Name] = @projectName	ORDER BY [Land Owner ID]
+	SELECT * FROM  CountProperty.vwSeeAllMovableProperty WHERE [Project Name] = @projectName	ORDER BY [Land Owner ID]
+	SELECT * FROM  CountProperty.vwSeeCountedHouse WHERE [Project Name] = @projectName	ORDER BY [Land Owner ID]
+	SELECT * FROM  CountProperty.vwSeeCountedBLDG  WHERE [House ID] in (	SELECT [House ID] FROM  CountProperty.vwSeeCountedHouse WHERE [Project Name] = @projectName)	ORDER BY [House ID]
+END
+GO
+
 
