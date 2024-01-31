@@ -515,3 +515,20 @@ ELSE
 END
 
 GO
+
+
+-- CREATE PROCEDURE Update private work table
+GO
+CREATE PROCEDURE Rehabilitation.spAddToPrivateWork(@interest VARCHAR(23), @govBudgetSup INT,@ExpertAdV VARCHAR(500), @landOwnID INT)
+AS
+
+BEGIN
+IF EXISTS (SELECT * FROM tblInterestRequest WHERE [Land Owner ID] = @landOwnID)
+	BEGIN
+	INSERT INTO Rehabilitation.tblPrivateWork VALUES(@interest, @govBudgetSup,@ExpertAdV,  @landOwnID, 'Rehabilitator') 
+	END
+ELSE
+	RAISERROR('Land owner not applicable.', 16, 1)
+END
+
+GO
