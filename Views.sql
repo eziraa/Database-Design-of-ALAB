@@ -242,3 +242,29 @@ WHERE
   RDN.[RPR Directorate Name] = EM.[RPR Director Name] 
   AND EM.[Job Title] = RE.[Job Title] 
 GO
+
+
+  -- CREATE EXPERTINFO
+ GO
+CREATE VIEW vwExpertInfo AS 
+SELECT 
+  [First Name], 
+  [Last Name], 
+  [Gender], 
+  [Phone Number], 
+  [Job Title] 
+FROM 
+  staff.tblEmployee 
+UNION 
+SELECT 
+  [First Name], 
+  [Last Name], 
+  [Gender], 
+  [Phone Number], 
+  'Observer' as [Job Title] 
+FROM 
+  CountProperty.tblCountProperties CP, 
+  LandOwner.tblLandOwner LO 
+WHERE 
+  LO.[Land Owner ID] = CP.[Representative ID] 
+  GO
