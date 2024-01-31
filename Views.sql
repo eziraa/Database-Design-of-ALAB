@@ -110,3 +110,27 @@ WHERE
   AND LP.[Plant Name] = P.[Plant Name] 
   AND L.[Land Owner ID] = VN.[Land Owner ID] 
 GO 
+
+  --CREATE VIEW TO SEE COUNTED NON PRODUCTIVE PLANT
+  GO
+  CREATE VIEW CountProperty.vwSeeCountedNonProd AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  [Project Name], 
+  NP.[Plant Name], 
+  Quantity, 
+  [Current Price], 
+  [Preservation Expense] 
+FROM 
+  Property.tblLandGrowsNonProPlants LNP, 
+  CountProperty.vwMinutedocument VN, 
+  Property.tblNonProductivePlants NP, 
+  Property.tblLand L, 
+  LandOwner.tblLandOwner LA 
+WHERE 
+  L.[Land Owner ID] = LA.[Land Owner ID] 
+  AND L.[Land ID] = LNP.[Land ID] 
+  AND NP.[PLant Name] = LNP.[Plant Name] 
+  AND LA.[Land Owner ID] = VN.[Land Owner ID] 
+ GO
