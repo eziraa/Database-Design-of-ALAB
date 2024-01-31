@@ -313,3 +313,13 @@ SELECT LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land Own
 FROM LandOwner.tblLandOwner LO, Request.tblProject PR, Compensation.tblTotalCompensation TC
 WHERE LO.[Land Owner ID] = TC.[Land Owner ID] AND PR.[Project ID ] = TC.[Project ID] 
 GO
+
+--CREATE VIEW TO SEE THE ACCOUNT OF THE LAND OWNERS
+GO
+CREATE VIEW Compensation.vwSeeAccount
+AS
+ SELECT   LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land Owner ID],[Account Number]
+FROM LandOwner.tblLandOwner LO, Compensation.tblAccount AC 
+WHERE LO.[Land Owner ID] = AC.[Land Owner ID]
+
+GO
