@@ -532,3 +532,17 @@ ELSE
 END
 
 GO
+
+
+--CREATE STORE PROCEDURE TO RETREIVE THE LAND OWNER INFORMATION WHO FOUND IN  AT SOME SUB-KEBELE
+
+GO
+CREATE PROCEDURE LandOwner.spLandOwnersInfo(@SubKebele VARCHAR(23))
+AS
+BEGIN 
+SELECT [Land Owner ID], [First Name], [Last Name],[Gender],[Birth Date],[Phone Number],[Region],[Zone],[Wereda],
+[Kebele], AD.[Sub Kebele] FROM LandOwner.tblLandOwner LO, LandOwner.tblAddress AD WHERE LO.[Sub Kebele] = AD.[Sub Kebele] AND
+AD.[Sub Kebele] = @SubKebele
+END 
+GO
+
