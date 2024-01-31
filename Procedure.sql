@@ -439,3 +439,11 @@ BEGIN
 	[Project ID] = @projectID
 END
 GO
+
+
+--CREATE STORE PEROCEDURE TO SEE THE PAYMENT TABLE
+GO
+CREATE PROCEDURE Compensation.spSeePayment(@projectName VARCHAR(34))
+AS
+SELECT * FROM Compensation.vwProjPaysToLanOwn WHERE [Project Name] = @projectName
+GO
