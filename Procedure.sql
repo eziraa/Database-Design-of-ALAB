@@ -323,3 +323,13 @@ BEGIN
 	
 END
 GO
+
+-- stored procedure to see all counted movable property for a specific project
+GO
+CREATE PROCEDURE CountProperty.spSeeMovableProperty(@projectName VARCHAR(34))
+AS
+BEGIN
+SELECT * FROM CountProperty.vwSeeAllMovableProperty 
+WHERE [Project Name] = @projectName
+END
+GO
