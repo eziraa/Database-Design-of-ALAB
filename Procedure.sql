@@ -344,3 +344,14 @@ SELECT * FROM CountProperty.vwSeeAllMovableProperty
 WHERE [Project Name] = @projectName AND [Land Owner ID] = @landOwnID
 END
 GO
+
+
+-- To see all counted property for a specific project
+GO
+CREATE PROCEDURE CountProperty.spCountedInfo (@ProjectName VARCHAR(23))
+AS
+BEGIN
+SELECT * FROM CountProperty.vwCountedInfo
+WHERE [Project Name] = @ProjectName
+END
+GO
