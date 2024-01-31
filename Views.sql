@@ -221,3 +221,24 @@ WHERE
   PR.[Project ID] = PRL.[Project ID] 
   AND PRL.[Sub Kebele] = AD.[Sub Kebele] 
   GO
+
+    -- CREATE VIEW EMPLOYEEINFO
+  GO
+  CREATE VIEW Staff.vwEmployeeInfo AS 
+SELECT 
+  [Employee ID], 
+  [First Name], 
+  [Last Name], 
+  [Gender], 
+  RE.[Job Title], 
+  EM.[Phone Number], 
+  Em.[Email], 
+  RDN.[RPR Directorate Name] 
+FROM 
+  tblEmployee EM, 
+  tblRPRDirectorate RDN, 
+  Staff.tblResponsibility RE 
+WHERE 
+  RDN.[RPR Directorate Name] = EM.[RPR Director Name] 
+  AND EM.[Job Title] = RE.[Job Title] 
+GO
