@@ -603,3 +603,19 @@ COMMIT
 GO
 
 
+--CREATE PROCEDURE TO SEE EXPERTS WHO INVOLVE IN PARTICULAR PROJECT
+GO
+ CREATE PROCEDURE staff.spExpertsInfo(@ProjectName VARCHAR(23))
+ AS 
+ BEGIN
+ DECLARE @reqID INT 
+ SELECT @reqID = (SELECT [Project ID]  FROM Request.tblProject WHERE [Project Name] = @ProjectName)
+ SELECT [First Name],[Last Name],[Gender],[Phone Number],[Job Title] FROM tblEmployee  UNION SELECT
+ [First Name],[Last Name],[Gender],[Phone Number],'Representative' as [Job Title]  FROM CountProperty.tblCountProperties CP ,LandOwner.tblLandOwner LO 
+ WHERE LO.[Land Owner ID] = CP.[Representative ID] AND [Project ID] = @reqID
+ END
+ GO
+
+ 
+
+
