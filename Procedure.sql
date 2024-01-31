@@ -564,3 +564,14 @@ SELECT NPP.[Plant Name], [Quantity],[Current Price], [Growth Expense],[Preservat
  [Land Owner ID] = @landOwnerId))
 END
 GO
+
+--CREATE PROCEDURE TO SEE THE SPECIFIC SUB KEBELE'S LAND INFO
+GO
+CREATE PROCEDURE Property.spSubKebeleLandInfo(@subkebele varchar(34))
+AS 
+BEGIN 
+SELECT [Land ID], [Land Type] ,[Land Use], [Land Area],[Region], [Zone], [Wereda], [Kebele], AD.[Sub Kebele]
+FROM Property.tblLand LA, LandOwner.tblAddress AD
+WHERE LA.[Sub Kebele] = AD.[Sub Kebele] AND AD.[Sub Kebele] = @subkebele
+END
+GO
