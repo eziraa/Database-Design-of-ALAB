@@ -113,7 +113,7 @@ CREATE TABLE Property.tblBLDGMaterialBuildsHouse(
 	CONSTRAINT tblBLDGMaterialBuildsHousePK PRIMARY KEY ([BLDGMterial Name],[House ID]))
 
 --CREATE PROJECT TABLE
-CREATE TABLE tblProject(
+CREATE TABLE Request.tblProject(
 	[Project ID ]INT CONSTRAINT tblProjectPK PRIMARY KEY IDENTITY(1, 1),
 	[Project Name] VARCHAR(23),
 	[Project Type] VARCHAR(25))
@@ -167,7 +167,7 @@ CREATE TABLE  tblEmployee(
 
 
 --CREATE PROJECT REQUEST TO LAND
-CREATE TABLE tblProReqToLand(
+CREATE TABLE Request.tblProReqToLand(
 	[Request ID] INT CONSTRAINT tblProReqToLandPK PRIMARY KEY  IDENTITY(1,1),
 	[Urgency] VARCHAR(20),
 	[Land Recoverability] VARCHAR(20),
@@ -191,7 +191,7 @@ CREATE TABLE tblPaymentCheck(
 
 
 --CREATE NOTIFY LAND OWNER TABLE
-CREATE TABLE tblNotifyLandOwner (
+CREATE TABLE Request.tblNotifyLandOwner (
 	[Notification Date] DATE,
 	[Recieved Or Not] VARCHAR(23),
 	[Notification Reason] VARCHAR(23),
