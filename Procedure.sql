@@ -366,3 +366,11 @@ SELECT * FROM Compensation.vwAllEstimatedPrice
 WHERE [Project Name] = @ProjectName
 END
 GO
+
+--CREATE STORE PROCEDURE TO SEE THE TOTAL COMPENSATION for prticular project
+GO
+CREATE PROCEDURE Compensation.spSeeTotalCompensation(@projectName VARCHAR(23))
+AS
+SELECT * FROM Compensation.vwSeeTotalCompensation WHERE [Project Name] = @projectName
+GO
+
