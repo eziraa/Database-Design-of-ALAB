@@ -234,3 +234,19 @@ END
 GO
 
 
+--create a procedure to  Update quantity of building material of the given  house
+GO
+CREATE PROCEDURE CountProperty.spUpdateQuaBM (@name VARCHAR(23), @Quantity INT, @houseID INT)
+AS
+BEGIN
+   IF EXISTS(SELECT * FROM Property.tblBLDGMaterial WHERE [BLDGMterial Name] = @name)
+	   IF NOT EXISTS (SELECT * FROM Property.tblBLDGMaterialBuildsHouse WHERE [BLDGMterial Name] = @name AND [House ID] = @houseID)
+		INSERT INTO Property.tblBLDGMaterialBuildsHouse VALUES(@name, @Quantity, @houseID)
+	   ELSE
+	   RAISERROR('The recorder already exist',16,1)
+  ELSE 
+   RAISERROR('The building material does not found in the database',16,1)
+END
+GO
+
+
