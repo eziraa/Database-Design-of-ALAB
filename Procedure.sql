@@ -188,3 +188,22 @@ BEGIN
 END
 GO
 
+
+-- Create   a procedure to  Update quatntity of productive plants
+
+GO
+CREATE PROCEDURE CountProperty.spUpdateProdPlant(@plantName VARCHAR(23), @highQuantity INT, @midQuantity INT, @lowQuantity INT, @growExp FLOAT,
+ @preserveExp FLOAT, @landID INT)
+AS
+BEGIN
+    IF EXISTS (SELECT * FROM Property.tblProductivePlants WHERE [Plant Name] = @plantName)
+		IF NOT EXISTS (SELECT *  FROM Property.tblLandGrowsProdPlants WHERE [Plant Name] = @plantName AND [Land ID] = @landID)
+		INSERT INTO Property.tblLandGrowsProdPlants VALUES(@plantName,  @highQuantity , @midQuantity , @lowQuantity, @growExp, @preserveExp, @landID)
+		ELSE
+		RAISERROR('The plant is already exist ',16,1)
+	ELSE
+	RAISERROR('The plant is nor found in the DATABASE ',16,1)
+	
+
+END
+GO
