@@ -96,3 +96,18 @@ BEGIN
 END
 GO
 
+--CREATE PROCEDURE TO Update the notification cofirmition wheather or not landowners has recieved notification for discusssion
+GO
+CREATE PROCEDURE Request.spUpdateAcceptance (@LandOwnerId INT, @Reason VARCHAR(23),@projectname VARCHAR(23), @RecievedOrNot VARCHAR(23))
+AS
+BEGIN
+	DECLARE @PRID INT
+	SELECT @PRID = (SELECT [Project ID] FROM Request.tblProject WHERE [Project Name] = @ProjectName)
+    IF EXISTS (SELECT * FROM Request.tblNotifyLandOwner WHERE [Land Owner ID] = @LandOwnerId AND [Notification Reason] = @Reason )	
+	UPDATE Request.tblNotifyLandOwner set [Recieved Or Not] = @RecievedOrNot WHERE [Land Owner ID] = @LandOwnerId AND [Project ID] = @PRID AND
+	[Notification Reason] = @Reason
+	ELSE
+	RAISERROR('The record does not exist',16,1)
+END
+GO
+
