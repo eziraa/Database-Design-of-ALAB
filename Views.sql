@@ -344,3 +344,13 @@ FROM LandOwner.tblLandOwner LO, Request.tblProject PR, Compensation.tblProjPaysT
 WHERE LO.[Land Owner ID] = PC.[Land Owner ID] AND PR.[Project ID ] = PC.[Project ID]
 
 GO
+
+--CREATE VIEW TO SEE PROIRITY TABLE
+GO
+CREATE VIEW Rehabilitation.vwSeePriority
+AS
+SELECT LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name',   LO.[Land Owner ID], 
+PT.[City Land Area], PT.[Reason for City Land], PT.Disability
+FROM Rehabilitation.tblPriority PT, LandOwner.tblLandOwner LO
+WHERE  LO.[Land Owner ID] = PT.[Land Owner ID] 
+GO
