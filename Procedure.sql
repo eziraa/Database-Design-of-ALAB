@@ -287,3 +287,16 @@ END
 GO
 
 
+-- CREATE PROCEDURE TO SEE TH SPECIFIC LAND OWNER PROPERTY
+GO
+CREATE PROCEDURE  CountProperty.spSeeCountedOne(@LandOwnerId INT, @projectName VARCHAR(23))
+AS
+BEGIN
+	SELECT * FROM  CountProperty.vwSeeCountedCrop	WHERE [Land Owner ID] = @LandOwnerId AND [Project Name] = @projectName
+	SELECT * FROM  CountProperty.vwSeeCountedPlant	WHERE  [Land Owner ID] = @LandOwnerId AND [Project Name] = @projectName
+	SELECT * FROM  CountProperty.vwSeeCountedNonProd WHERE  [Land Owner ID] = @LandOwnerId AND [Project Name] = @projectName
+	SELECT * FROM  CountProperty.vwSeeAllMovableProperty	WHERE  [Land Owner ID] = @LandOwnerId AND [Project Name] = @projectName
+	SELECT * FROM  CountProperty.vwSeeCountedHouse	WHERE  [Land Owner ID] = @LandOwnerId AND [Project Name] = @projectName
+	SELECT * FROM  CountProperty.vwSeeCountedBLDG  WHERE [House ID] in (	SELECT [House ID] FROM  CountProperty.vwSeeCountedHouse WHERE [Project Name] = @projectName and   [Land Owner ID] = @LandOwnerId)	ORDER BY [House ID]
+END
+GO
