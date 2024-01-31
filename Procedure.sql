@@ -119,3 +119,26 @@ CREATE PROCEDURE Request.spSeeNotificaton(@reason VARCHAR(23) , @projectName VAR
 AS
  SELECT * FROM Request.vwNotification WHERE [Notification Reason] = @reason AND [Project Name] = @projectName
 GO
+
+
+-- Create procedure to make minute document by taking landownerid, project name, reason, checkpresence
+GO
+
+CREATE PROCEDURE CountProperty.spMakeMinuteDocument (@LandOwnerId INT, @Reason VARCHAR(23), @ProjectName VARCHAR(23), @checkpresence VARCHAR(23))
+AS
+BEGIN 
+	DECLARE @PRID INT
+	SELECT @PRID = (SELECT [Project ID] FROM Request.tblProject WHERE [Project Name] = @ProjectName)
+	IF EXISTS (SELECT * FROM Request.tblNotifyLandOwner WHERE 
+	[Land Owner ID] = @LandOwnerId AND [Project ID] = @PRID)
+	IF NOT EXISTS ( SELECT * FROM CountProperty.tblMinuteDocument
+	WHERE [Land Owner ID] = @LandOwnerId AND [Document Type] = @Reason) 
+	BEGIN
+		INSERT INTO CountProperty.tblMinuteDocument VALUES (@checkpresence, GETDATE(), @Reason, @LandOwnerId, 'Minute Document Holder', @PRID)
+	END
+	ELSE
+	RAISERROR('The record  already  exist in the document ',16,1)
+	ELSE
+	RAISERROR('The LAND OWNER  IS not notified ',16,1)
+END
+GO
