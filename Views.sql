@@ -196,3 +196,28 @@ FROM
 WHERE 
   lA.[Land Owner ID] = EP.[Land Owner ID] 
   GO
+
+  -- CREATE PROJECTINFO VIEW
+  GO
+  CREATE VIEW Request.vwProjectInfo AS 
+SELECT 
+  [Project Type], 
+  [Project Name], 
+  [Urgency], 
+  [Land Recoverability], 
+  [Request Date], 
+  [Requested Area], 
+  [Project Duration], 
+  [Region], 
+  [Zone], 
+  [Wereda], 
+  [Kebele], 
+  AD.[Sub Kebele] 
+FROM 
+  Request.tblProject PR, 
+  Request.tblProReqToLand PRL, 
+  LandOwner.tblAddress AD 
+WHERE 
+  PR.[Project ID] = PRL.[Project ID] 
+  AND PRL.[Sub Kebele] = AD.[Sub Kebele] 
+  GO
