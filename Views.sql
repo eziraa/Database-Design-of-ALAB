@@ -281,3 +281,15 @@ Request.tblProReqToLand PL
 WHERE LO.[Land Owner ID] = LA.[Land Owner ID] AND MP.[Land ID] = LA.[Land ID] AND PR.[Project ID ] = PL.[Project ID]
 AND MP.[Land ID] = LA.[Land ID]
 GO
+
+-- To see all counted property 
+GO
+CREATE VIEW CountProperty.vwCountedInfo
+AS 
+SELECT   LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land Owner ID], [Project Name], [Counting Date],
+[Check Counting], [Counted By], RP.[First Name] + ' ' + RP.[Last NAme] as 'Representative Name'
+FROM LandOwner.tblLandOwner LO, Request.tblProject PR, CountProperty.tblCountProperties CP, 
+LandOwner.tblLandOwner RP
+WHERE LO.[Land Owner ID] = CP.[Land Owner ID] AND PR.[Project ID ] = CP.[Project ID] 
+AND  [Representative ID] = RP.[Land Owner ID]
+GO
