@@ -138,7 +138,7 @@ CREATE TABLE LandOwner.tblFamilyMember(
 
 
 --CREATE PRIVATE WORK TABLE 
-CREATE TABLE tblPrivateWork (
+CREATE TABLE Rehabilitation.tblPrivateWork (
 	[PIntersted Job Type] VARCHAR(23),
 	[Governmental Budget Support] FLOAT ,
 	[Expert Advice] VARCHAR(MAX) ,
@@ -233,7 +233,7 @@ CREATE TABLE tblEstimatePrice(
 
 --CREATE TABLE PRIORITY LAND OWNERS
 
-CREATE TABLE tblPriority(
+CREATE TABLE Rehabilitation.tblPriority(
 	[City Land Area] FLOAT ,
 	[Reason for City Land] VARCHAR(23),
 	[Disability] VARCHAR(23),
@@ -243,13 +243,13 @@ CREATE TABLE tblPriority(
 
 
 --CREATE TEAM TABLE
-CREATE TABLE tblTeam(
+CREATE TABLE Rehabilitation.tblTeam(
 	[Team Name] VARCHAR(23) CONSTRAINT tblGroupWorkPK PRIMARY KEY ,
 	[Number of Member] 	INT	
 	 )
 
 --CREATE GROUP REABILITATES ON TABLE 
-CREATE TABLE tblTeamRehabilitatesOn(
+CREATE TABLE Rehabilitation.tblTeamRehabilitatesOn(
     [Land Owner ID] INT CONSTRAINT tblGroupRehabilitatesOnFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	[Managed By] VARCHAR(23) CONSTRAINT tblGroupRehabilitatesOnFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
 	[Team Name] VARCHAR(23) CONSTRAINT tblGroupRehabilitatesOnFK3 FOREIGN KEY REFERENCES Rehabilitation.tblTeam([Team Name]),
@@ -266,14 +266,14 @@ CREATE TABLE tblTotalCompensation(
    CONSTRAINT tblTotalCompensationPK PRIMARY KEY ([Land Owner ID],[Project ID]))
 
 --CREATE InterestRequest TABLE
-CREATE TABLE tblInterestRequest(
+CREATE TABLE Rehabilitation.tblInterestRequest(
 	[Interest Name] VARCHAR(23) ,
 	[Land Owner ID] INT CONSTRAINT InterestRequestFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([land Owner ID]),
 	[Requested By] VARCHAR(23) CONSTRAINT InterestRequestFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]), 
 	CONSTRAINT tblInterestRequestPK PRIMARY KEY ([Land Owner ID],[Interest Name]))
 
 --CREATE PRIORITIZED LAND OWNER TABLE
-CREATE TABLE tblPrioritizedLandOwner(
+CREATE TABLE Rehabilitation.tblPrioritizedLandOwner(
 	[Priority ID] INT IDENTITY(1, 1),
 	[Land Owner ID] INT CONSTRAINT tblPrioritizedLandOwnerFK1  FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([land Owner ID]),
 	[Compensated Area of City Land] INT,
