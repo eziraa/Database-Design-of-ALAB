@@ -323,3 +323,13 @@ FROM LandOwner.tblLandOwner LO, Compensation.tblAccount AC
 WHERE LO.[Land Owner ID] = AC.[Land Owner ID]
 
 GO
+
+--CREATE VIEW TO CHECK PAYMENT
+GO
+CREATE VIEW Compensation.vwPaymentCheck
+AS
+ SELECT   LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land Owner ID],[Checked By], PR.[Project Name],
+ [Compensation Date], [Check Payment], [Amount] 
+FROM LandOwner.tblLandOwner LO, Request.tblProject PR, Compensation.tblPaymentCheck PC
+WHERE LO.[Land Owner ID] = PC.[Land Owner ID] AND PR.[Project ID ] = PC.[Project ID] 
+GO
