@@ -355,3 +355,14 @@ SELECT * FROM CountProperty.vwCountedInfo
 WHERE [Project Name] = @ProjectName
 END
 GO
+
+
+-- To see all estimated price for a specific project
+GO
+CREATE PROCEDURE Compensation.spEstimatedPrice(@ProjectName VARCHAR(23))
+AS
+BEGIN
+SELECT * FROM Compensation.vwAllEstimatedPrice
+WHERE [Project Name] = @ProjectName
+END
+GO
