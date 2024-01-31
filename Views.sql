@@ -364,3 +364,19 @@ SELECT  LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name',   LO.[Land 
 WHERE  LO.[Land Owner ID] = PL.[Land Owner ID] 
 GO
 
+--CREATE VIEW TO SEE THE INTEREST OF THE LAND OWNER
+GO
+  CREATE VIEW Rehabilitation.vwSeeLandOwersInterest AS 
+SELECT 
+  [Interest Name], 
+  [First Name] + ' ' + [Last Name] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  [Requested By] 
+FROM 
+  LandOwner.tblLandOwner L, 
+  Rehabilitation.tblInterestRequest I 
+WHERE 
+  L.[Land Owner ID] = I.[Land Owner ID] 
+ GO
+ 
+
