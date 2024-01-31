@@ -303,3 +303,13 @@ SELECT   LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land O
 FROM LandOwner.tblLandOwner LO, Request.tblProject PR, Compensation.tblEstimatePrice EP
 WHERE LO.[Land Owner ID] = EP.[Land Owner ID] AND PR.[Project ID ] = EP.[Project ID] 
 GO
+
+--CREATE VIEW TO SEE THE TOTAL COMPENSATION
+GO
+CREATE VIEW Compensation.vwSeeTotalCompensation
+AS
+SELECT LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land Owner ID], [Project Name], 
+[Amount] , [Compensation Date]
+FROM LandOwner.tblLandOwner LO, Request.tblProject PR, Compensation.tblTotalCompensation TC
+WHERE LO.[Land Owner ID] = TC.[Land Owner ID] AND PR.[Project ID ] = TC.[Project ID] 
+GO
