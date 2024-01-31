@@ -293,3 +293,13 @@ LandOwner.tblLandOwner RP
 WHERE LO.[Land Owner ID] = CP.[Land Owner ID] AND PR.[Project ID ] = CP.[Project ID] 
 AND  [Representative ID] = RP.[Land Owner ID]
 GO
+
+-- To see all estimated price
+GO
+CREATE VIEW Compensation.vwAllEstimatedPrice
+AS 
+SELECT   LO.[First Name] + ' ' + LO.[Last Name] as 'Land Owner Name', LO.[Land Owner ID], [Project Name], 
+[Estimation Date],[Check Estiamtion], [Estimated By]
+FROM LandOwner.tblLandOwner LO, Request.tblProject PR, Compensation.tblEstimatePrice EP
+WHERE LO.[Land Owner ID] = EP.[Land Owner ID] AND PR.[Project ID ] = EP.[Project ID] 
+GO
