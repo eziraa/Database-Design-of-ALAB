@@ -178,3 +178,21 @@ WHERE
   AND H.[House ID] = BL.[House ID] 
   AND BL.[BLDGMterial Name] = BLDG.[BLDGMterial Name] 
   GO
+
+    --CREATE VIEW TO SEE THE FINAL ETIMATED COMPENSATION OF LAND OWNER
+  GO
+  CREATE VIEW Compensation.vwSeeEstimated AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] AS 'Land Owner Name', 
+  LA.[Land Owner ID], 
+  EP.[Check Estiamtion ], 
+  Amount, 
+  EP.[Estimation Date], 
+  EP.[Project ID], 
+  EP.[Estimated by] 
+FROM 
+  LandOwner.tblLandOwner LA, 
+  Compensation.tblEstimatePrice EP 
+WHERE 
+  lA.[Land Owner ID] = EP.[Land Owner ID] 
+  GO
