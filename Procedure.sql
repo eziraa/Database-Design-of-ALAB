@@ -207,3 +207,19 @@ BEGIN
 
 END
 GO
+
+--the counters count  Update movable property on the given land
+
+GO
+CREATE PROCEDURE CountProperty.spUpdatingMovableProperty(@propertyName VARCHAR(23), @uprooteExp FLOAT, @transportExp FLOAT, @InstallExp FLOAT, 
+				 @recoveryExp FLOAT, @landID INT)
+AS
+BEGIN
+		IF NOT EXISTS (SELECT *  FROM Property.tblMovableProperty WHERE [Property Name] = @propertyName AND [Land ID] = @landID)
+		INSERT INTO Property.tblMovableProperty VALUES (@propertyName, @uprooteExp, @transportExp, @InstallExp, @recoveryExp, @landID)
+		ELSE
+		RAISERROR('Property  already exist ',16,1)
+	
+END
+GO
+
