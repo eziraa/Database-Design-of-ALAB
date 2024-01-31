@@ -36,3 +36,24 @@ WHERE
   P.[Project ID ] = R.[Project ID] 
   AND L.[Land Owner ID] = R.[Land Owner ID] 
   GO
+
+  --CREATE VIEW TO SEE THE MINUTE  DOCUMENT
+  GO
+   CREATE VIEW CountProperty.vwMinutedocument AS 
+SELECT 
+  l.[Land Owner ID], 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  [Check Presense], 
+  [Discussion Date], 
+  [Document Type], 
+  [Project Name], 
+  [Held By] 
+FROM 
+  Request.tblProject P, 
+  CountProperty.tblMinuteDocument M, 
+  LandOwner.tblLandOwner L 
+WHERE 
+  P.[Project ID ] = M.[Project ID] 
+  AND L.[Land Owner ID] = M.[Land Owner ID] 
+  GO
+  
