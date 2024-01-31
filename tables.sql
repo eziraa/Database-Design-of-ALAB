@@ -121,7 +121,7 @@ CREATE TABLE Request.tblProject(
 
 --CREATE Responsibility TABLE
 
-CREATE TABLE tblResponsibility([Job Title] VARCHAR(23) CONSTRAINT tblResponsibilityPK PRIMARY KEY )
+CREATE TABLE Staff.tblResponsibility([Job Title] VARCHAR(23) CONSTRAINT tblResponsibilityPK PRIMARY KEY )
 
 --CREATE FAMILY MEMEBER TABLE
 CREATE TABLE LandOwner.tblFamilyMember(
@@ -147,14 +147,14 @@ CREATE TABLE tblPrivateWork (
 	CONSTRAINT tblPrivateWorkPK PRIMARY KEY ([Land Owner ID]) )
 
 --CREATE RPRDIRACTORATE TABLE
-CREATE TABLE tblRPRDirectorate (
+CREATE TABLE Staff.tblRPRDirectorate (
 [RPR Directorate Name] VARCHAR(70) CONSTRAINT tblRPRDirectoratePK PRIMARY KEY ,
 [Email] VARCHAR(70) UNIQUE,
 [Phone Number] INT UNIQUE)
 
 
 --CREATE EMPLOYEE TABLE
-CREATE TABLE  tblEmployee(
+CREATE TABLE  Staff.tblEmployee(
 	[Employee ID] INT CONSTRAINT tblEpmloyee PRIMARY KEY ,
 	[First Name] VARCHAR(23),
 	[Last Name] VARCHAR (23),
