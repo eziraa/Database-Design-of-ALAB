@@ -57,3 +57,27 @@ WHERE
   AND L.[Land Owner ID] = M.[Land Owner ID] 
   GO
   
+  --CREATE VIEW TO SEE COUNTED CROP
+  GO 
+  CREATE VIEW CountProperty.vwSeeCountedCrop AS 
+SELECT 
+  [First Name] + ' ' + [Last NAme] as 'Land Owner Name', 
+  L.[Land Owner ID], 
+  [Project Name], 
+  C.[Crop Name], 
+  LC.[Hervest QPerH of Last Year], 
+  lc.[Hervest QPerH of This Year], 
+  lc.[Hervest QPerH Two Year Ago], 
+  [Current Price] 
+FROM 
+  Property.tblLandGivesCrop LC, 
+  Property.tblCrop C, 
+  Property.tblLand L, 
+  CountProperty.vwMinutedocument VN, 
+  LandOwner.tblLandOwner LA 
+WHERE 
+  L.[Land Owner ID] = LA.[Land Owner ID] 
+  AND L.[Land ID] = LC.[Land ID] 
+  AND LC.[Crop Name] = C.[Crop Name] 
+  AND LA.[Land Owner ID] = VN.[Land Owner ID]
+  GO 
