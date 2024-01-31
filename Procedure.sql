@@ -429,3 +429,13 @@ AS
 SELECT * FROM Compensation.vwPaymentCheck 
 WHERE [Project Name] = @projectName
 GO
+
+-- updating projects pay to landowners
+GO
+CREATE PROCEDURE Compensation.spPayToLandOwners( @landOwnerID INT, @projectID INT)
+AS
+BEGIN
+	UPDATE Compensation.tblProjPaysToLanOwn SET [Deposited Date] = GETDATE(), Amount = Compensation.fnTotalComp(@landOwnerID) WHERE [Land Owner ID] = @landOwnerID AND
+	[Project ID] = @projectID
+END
+GO
