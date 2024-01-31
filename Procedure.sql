@@ -374,3 +374,12 @@ AS
 SELECT * FROM Compensation.vwSeeTotalCompensation WHERE [Project Name] = @projectName
 GO
 
+
+--CREATE STORE PROCEDURE TO SEE THE ACCOUNT OF LANDOWNERS OF SPECIFIC PROJECT
+GO
+CREATE PROCEDURE Compensation.spSeeAllAcount(@projectName VARCHAR(34))
+AS
+SELECT * FROM Compensation.vwSeeAccount WHERE [Land Owner ID] IN (SELECT [Land Owner ID] 
+FROM  Compensation.vwSeeTotalCompensation WHERE [Project Name] = @projectName) 
+GO
+
