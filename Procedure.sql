@@ -77,3 +77,22 @@ BEGIN TRANSACTION T1
 
 GO
 
+
+
+--CREATE PROCEDURE TO MAKE NOTIFICATION
+GO
+ CREATE PROCEDURE Request.spNotifyLandOwner (@LandOwnerId INT, @Reason VARCHAR(23), @ProjectName VARCHAR(23))
+AS 
+BEGIN
+	DECLARE @PRID INT
+	IF NOT EXISTS (SELECT * FROM Request.tblNotifyLandOwner WHERE [Notification Reason] = @Reason AND [Land Owner ID] = @LandOwnerId)
+	BEGIN
+	SELECT @PRID = (SELECT [Project ID] FROM Request.tblProject WHERE [Project Name] = @ProjectName)
+	INSERT INTO Request.tblNotifyLandOwner ( [Notification Reason], [Land Owner ID],
+	[Notified By],	[Project ID],[Notification Date])	VALUES ( @Reason, @LandOwnerID, 'Notifier',  @PRID , getDate())
+	END
+	ELSE
+	RAISERROR('Sorry the notification already exist',16,1)	
+END
+GO
+
