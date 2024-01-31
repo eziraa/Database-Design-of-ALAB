@@ -180,7 +180,7 @@ CREATE TABLE Request.tblProReqToLand(
 
 
 --CREATE PAYMENT CHECK TABLE
-CREATE TABLE tblPaymentCheck(
+CREATE TABLE Compensation.tblPaymentCheck(
 	[Land Owner ID] INT CONSTRAINT tblPaymentCheckFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	[Checked By] VARCHAR(23) CONSTRAINT tblPaymentCheckFK2 FOREIGN KEY REFERENCES staff.tblresponsibility([Job Title]),
 	[Project ID] INT CONSTRAINT tblPaymentCheckFK3 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
@@ -222,7 +222,7 @@ CREATE TABLE tblCountProperties(
 	CONSTRAINT tblCountPropertiesPK PRIMARY KEY ([Land Owner ID],[Project ID]) )
 
 --CREATE ESTIMATE PRICE TABLE
-CREATE TABLE tblEstimatePrice(
+CREATE TABLE Compensation.tblEstimatePrice(
 	[Estimation Date] DATE,
 	[Check Estiamtion ] VARCHAR(23),
 	[Amount] FLOAT,
@@ -258,7 +258,7 @@ CREATE TABLE Rehabilitation.tblTeamRehabilitatesOn(
 	CONSTRAINT tblTeamRehabilitatesOnPK PRIMARY KEY ([Land Owner ID], [Team Name]))
 
 --CREATE TOTAL COMPENSATION  TABLE
-CREATE TABLE tblTotalCompensation(
+CREATE TABLE Compensation.tblTotalCompensation(
    [Amount] FLOAT ,
    [Compensation Date] DATE ,
    [Land Owner ID] INT CONSTRAINT tblTotalCompensationFK1 FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
@@ -282,7 +282,7 @@ CREATE TABLE Rehabilitation.tblPrioritizedLandOwner(
 	)
 
 --CREATE ACCOUNT TABLE
-CREATE TABLE tblAccount(
+CREATE TABLE Compensation.tblAccount(
 	[Land Owner ID] INT CONSTRAINT tblAccountFK1  FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	[Account Number] INT UNIQUE,
 	CONSTRAINT tblAccountPK  PRIMARY KEY ([Land Owner ID])
@@ -290,7 +290,7 @@ CREATE TABLE tblAccount(
 
 
 -- CREATE TABLE PROJECT PAYS TO LAND
-CREATE TABLE tblProjPaysToLanOwn(
+CREATE TABLE Compensation.tblProjPaysToLanOwn(
 	[Land Owner ID] INT CONSTRAINT tblProjPaysToLanOwnFK1  FOREIGN KEY  REFERENCES LandOwner.tblLandOwner([Land Owner ID]),
 	[Project ID] INT CONSTRAINT tblProjPaysToLanOwnFK2 FOREIGN KEY REFERENCES Request.tblProject([Project ID]),
 	[Deposited Date] DATE,
