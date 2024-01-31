@@ -404,3 +404,20 @@ IF(@@ERROR<>0)
 	ROLLBACK TRANSACTION T1
 COMMIT
 GO
+
+-- INSERTING ACCOUNT OF LANDOWNERS INTO THE TABLE ACCOUNT 
+GO
+CREATE PROCEDURE Compensation.spAddAccount(@landOwnerID INT, @projectID INT, @accountNum INT)
+AS
+BEGIN TRANSACTION T1
+
+	IF NOT EXISTS (SELECT * FROM Compensation.tblAccount WHERE [Land Owner ID] = @landOwnerID)
+	BEGIN
+		INSERT INTO Compensation.tblAccount VALUES (@landOwnerID, @accountNum)
+		INSERT INTO Compensation.tblProjPaysToLanOwn([Land Owner ID], [Project ID]) VALUES (@landOwnerID, @projectID)
+	END
+IF(@@ERROR<>0)
+	ROLLBACK TRANSACTION T1
+
+COMMIT 
+GO
