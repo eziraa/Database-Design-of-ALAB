@@ -112,3 +112,21 @@ BEGIN
 RETURN @total * 15
 END
 GO
+
+
+--The estimators calcualte the total compensation for productive plants  
+
+GO
+CREATE FUNCTION Compensation.fnTotalProComp(@landID INT)
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @total FLOAT
+	SELECT @total = (SELECT SUM([High Level Quantity] *[High Level Current Price] +
+	[Middle Level Quantity] *[Middel Level Current Price] +
+	[Low Level Quantity] *[Low Level Current Price] + [Growth Expense] + [Preservation Expense])
+	 FROM Property.tblLandGrowsProdPlants LGP, Property.tblProductivePlants PP
+	  WHERE LGP.[Plant Name] = PP.[Plant Name] AND [Land ID] = @landID)
+RETURN @total
+END
+GO
