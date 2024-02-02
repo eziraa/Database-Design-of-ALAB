@@ -1,0 +1,14 @@
+
+--Create trigger to update the total compensation when the crop quantity is updated
+GO
+CREATE TRIGGER Property.trigUpdateTotalCrop ON Property.tblLandGivesCrop
+AFTER UPDATE
+AS
+IF ( UPDATE([Hervest QPerH of This Year]) OR UPDATE([Hervest QPerH of Last Year]) OR UPDATE([Hervest QPerH Two Year Ago]) )
+  BEGIN
+  DECLARE @temp1 INT ,@temp2 INT
+  SELECT @temp1 = (SELECT Compensation.fnTotalComp ([Land ID]) FROM INSERTED)
+  SELECT @temp2 = ( SELECT [Land Owner ID] from Property.tblLand WHERE [Land ID] = (SELECT [Land ID] FROM INSERTED))
+  UPDATE Compensation.tblTotalCompensation SET [Amount] = @temp1 WHERE [Land Owner ID] = @temp2
+  END
+GO
