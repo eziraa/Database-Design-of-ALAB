@@ -146,3 +146,18 @@ RETURN @total
 END
 GO
 
+
+-- create function calculate total compensation for building material
+
+GO
+CREATE FUNCTION Compensation.fnTotalBMComp(@houseID INT)
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @totalBM FLOAT
+	SELECT @totalBM = (SELECT SUM([Quantity] * [Current Price] ) FROM Property.tblBLDGMaterialBuildsHouse BMBH, Property.tblBLDGMaterial BM WHERE
+	BMBH.[BLDGMterial Name] = BM.[BLDGMterial Name] AND [House ID] =  @houseID)
+RETURN @totalBM
+END
+GO
+
