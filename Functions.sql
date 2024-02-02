@@ -175,3 +175,21 @@ RETURN @total *15
 END
 GO
 
+
+--calculate total compensation of a land
+GO
+CREATE FUNCTION Compensation.fnTotalComp(@landid INT )
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @total FLOAT
+	DECLARE @landOwnerID FLOAT
+	select @landOwnerID = (select [land Owner ID] from Property.tblLand where [Land ID] = @landid)
+	SELECT  @total = (SELECT  SUM (Compensation.fnCropCompenstation ([land ID]) + 
+	Compensation.fnTotalProComp([land ID]) +
+	 Compensation.fnTotalNonProductiveComp([land ID] ) + 
+	 Compensation.fnTotalMVExpComp([land ID]) + Compensation.fnTotalHouseComp([land ID]))
+	 FROM Property.tblLand WHERE [Land Owner ID] = @landOwnerID AND [Land ID] = @landID )
+RETURN @total
+END
+GO
