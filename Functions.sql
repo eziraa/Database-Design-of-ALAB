@@ -1,0 +1,10 @@
+-- CREATE A FUNCTION WHICH SELECT THE   AVELIABLE  LANDS WHICH ARE APPROPRIATE TO THE LAND REQUEST
+
+GO
+CREATE FUNCTION Request.fnSelectsLand(@SubKebele VARCHAR(23))
+RETURNS TABLE 
+AS
+RETURN SELECT * FROM Property.tblLand WHERE [Land Type] = 'Plain' AND [Land Use] IN ('Farming', 'Grazing') AND 
+[Sub Kebele] = @SubKebele
+GO
+
