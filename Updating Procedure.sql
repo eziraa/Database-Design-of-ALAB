@@ -62,3 +62,14 @@ BEGIN
 		UPDATE Property.tblMovableProperty SET [Recovery Expense] = @UpdateValue WHERE [Land ID] = @landID AND [Property Name] = @Name
 END
 GO
+
+-- updates table house
+
+GO
+    CREATE PROCEDURE Compensation.spUpdate2LabourQuan(@houseID INT, @landID INT, @UpdateValue INT)
+    AS
+    BEGIN
+        UPDATE Property.tblHouse SET [Labour Quantity] = @UpdateValue WHERE [Land ID] = @landID AND [House ID] = @houseID
+    END
+GO
+
