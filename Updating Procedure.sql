@@ -73,3 +73,12 @@ GO
     END
 GO
 
+-- CREATING PROCEDURE TO UPDATE BUILDING MATERIAL OF HOUSE
+
+GO
+    CREATE PROCEDURE Compensation.spUpdate2BMQuan(@houseID INT, @BMname VARCHAR(30), @UpdateValue INT)
+    AS
+    BEGIN
+        UPDATE Property.tblBLDGMaterialBuildsHouse SET [Quantity] = @UpdateValue WHERE [BLDGMterial Name] = @BMname AND [House ID] = @houseID
+    END
+GO
