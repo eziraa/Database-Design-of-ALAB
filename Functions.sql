@@ -161,3 +161,17 @@ RETURN @totalBM
 END
 GO
 
+-- create a function to calculate total compensation for house
+
+GO
+CREATE FUNCTION Compensation.fnTotalHouseComp(@landID INT)
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @total INT
+	SELECT @total = (SELECT SUM(Compensation.fnTotalBMComp([House ID]) + [Labour Quantity] *	[Current labour Cost]) FROM Property.tblHouse WHERE
+	[Land ID] = @landID)
+RETURN @total *15
+END
+GO
+
