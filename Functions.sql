@@ -130,3 +130,19 @@ BEGIN
 RETURN @total
 END
 GO
+
+
+-- create a function to calculate total compensation for movable property
+
+GO
+CREATE FUNCTION Compensation.fnTotalMVExpComp(@landID INT)
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @total FLOAT
+	SELECT @total = (SELECT SUM([Uprooting Expense] + [Transportation Expense] +
+	[Installation Expense] + [Recovery Expense]) FROM Property.tblMovableProperty WHERE [Land ID] = @landID)
+RETURN @total
+END
+GO
+
