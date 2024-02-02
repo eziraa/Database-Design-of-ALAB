@@ -193,3 +193,28 @@ BEGIN
 RETURN @total
 END
 GO
+
+
+GO
+CREATE FUNCTION Rehabilitation.fnCalcAge(@landOwner INT)
+RETURNS INT
+AS
+BEGIN
+DECLARE @Age INT
+ SELECT @Age= (SELECT Year(getDate()) - Year([Birth Date]) FROM LandOwner.tblLandOwner WHERE [Land Owner ID] = @landOwner)
+RETURN @Age
+END
+GO
+
+-- CREATE FUNCTION TO CHECK WHICH LANDOWNER IS ELIGIBLE TO GET CITYLAND
+GO
+CREATE FUNCTION Rehabilitation.fnCityLanEligibile(@landOwnerID INT)
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @expectedArea FLOAT
+	SELECT @expectedArea = (SELECT 500 - [City Land Area] FROM Rehabilitation.tblPriority WHERE [Land Owner ID] = @landOwnerID AND [Reason for City Land] 
+	IN ('By Award', 'By Buying') AND  [City Land Area] < 400)
+RETURN @expectedArea
+END
+GO
