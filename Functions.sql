@@ -97,3 +97,18 @@ BEGIN
 RETURN @total * 15
 END
 GO
+
+
+-- calculate total compensation for non productive plants
+
+GO
+CREATE FUNCTION .Compensation.fnTotalNonProductiveComp(@landID INT)
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @total FLOAT
+	SELECT @total = (SELECT SUM([Quantity] * [Current Price] + [Growth Expense] + [Preservation Expense])
+	 FROM Property.tblLandGrowsNonProPlants LGNP, Property.tblNonProductivePlants NP WHERE LGNP.[Plant Name] = NP.[Plant Name] AND [Land ID] = @landID)
+RETURN @total * 15
+END
+GO
