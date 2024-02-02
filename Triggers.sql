@@ -42,3 +42,18 @@ BEGIN
   UPDATE Compensation.tblTotalCompensation SET [Amount] = @temp1 WHERE [Land Owner ID] = @temp2
 END
 GO
+
+-- create trigger to update the total comopensation when movable property quantity is updated
+GO
+CREATE TRIGGER Property.trigUpdateMoveProp ON Property.tblMovableProperty 
+AFTER UPDATE
+AS
+IF(UPDATE ([Uprooting Expense]) OR UPDATE ([Transportation Expense]) OR UPDATE ([Installation Expense]) OR UPDATE( [Recovery Expense]))
+BEGIN
+  DECLARE @temp1 INT ,@temp2 INT
+  SELECT @temp1 = (SELECT Compensation.fnTotalComp ([Land ID]) FROM INSERTED)
+  SELECT @temp2 = ( SELECT [Land Owner ID] from Property.tblLand WHERE [Land ID] = (SELECT [Land ID] FROM INSERTED))
+  UPDATE Compensation.tblTotalCompensation SET [Amount] = @temp1 WHERE [Land Owner ID] = @temp2
+END
+GO
+
