@@ -42,3 +42,44 @@ BEGIN
  RETURN 
  END
 GO
+
+
+-- create function to calculate maximum of 3 
+
+GO
+CREATE FUNCTION Compensation.fnGetMax(@last2 FLOAT, @last FLOAT, @this FLOAT)
+RETURNS FLOAT
+AS
+BEGIN 
+	DECLARE @max FLOAT
+	IF ( @last2 > @last AND @last2 > @this)
+		SET @max = @last2
+	ELSE IF ( @last > @last2 AND @last > @this)
+		SET @max = @last
+	ELSE 
+		SET @max = @this
+RETURN @max
+END
+GO
+
+
+
+-- Create a function tof calulate total price for a single crop in a land
+
+GO
+CREATE FUNCTION Compensation.fnCropMax (@LandID INT, @cropName VARCHAR(23))
+RETURNS FLOAT
+AS
+BEGIN
+	DECLARE @total FLOAT, @maxHarvest FLOAT, @currentPriceMaxHarvest FLOAT
+	DECLARE @last2 FLOAT, @last FLOAT, @this FLOAT
+	SELECT @this= (SELECT [Hervest QPerH of This Year] FROM Property.tblLandGivesCrop WHERE [Crop Name] = @cropName AND [Land ID]= @landID)
+	SELECT @last = (SELECT [Hervest QPerH of Last Year] FROM Property.tblLandGivesCrop WHERE [Crop Name] = @cropName AND [Land ID]= @landID)
+	SELECT @last2 = (SELECT [Hervest QPerH Two Year Ago] FROM Property.tblLandGivesCrop WHERE [Crop Name] = @cropName AND [Land ID]= @landID)
+	SET @maxHarvest = Compensation.fnGetMax(@this, @last, @last2)
+	SELECT @currentPriceMaxHarvest = (SELECT [Current Price] FROM Property.tblCrop WHERE [Crop Name] = @cropName)
+	SET @total = @maxHarvest * @currentPriceMaxHarvest
+
+RETURN @total
+END
+GO
