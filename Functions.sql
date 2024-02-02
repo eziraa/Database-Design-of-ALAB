@@ -83,3 +83,17 @@ BEGIN
 RETURN @total
 END
 GO
+
+-- Create a function to calculating to compensation for crops in  a given land
+
+GO
+CREATE FUNCTION Compensation.fnCropCompenstation (@LandID INT)
+RETURNS FLOAT
+AS
+BEGIN
+
+	DECLARE @total FLOAT
+	SELECT @total = (SELECT AVG(Compensation.fnCropMax(@LandID, [Crop Name])) FROM Property.tblLandGivesCrop)
+RETURN @total * 15
+END
+GO
